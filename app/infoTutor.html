@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html ng-app="RBSapp"lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ระบบจองห้อง</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div ng-controller="infoTutorCtrl" class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-book"></i> <span>ระบบจองห้อง</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+            
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- <h3>General</h3> -->
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> หน้าหลัก <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="main">ตารางการใช้ห้อง</a></li>
+                      <li><a href="findemptyroom">ค้นหาห้องว่าง</a></li>
+                      <li><a href="studentauth">จองห้อง</a></li>
+                      <!-- <li><a href="index3.html">Dashboard3</a></li> -->
+                    </ul>
+                  </li>                  
+                  <li><a><i class="fa fa-info-circle"></i> ข้อมูลห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="infotutor">ห้องติว</a></li>
+                      <li><a href="inforedhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="infolinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> ข้อมูลนักศึกษา <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="checkid">ตรวจสอบข้อมูล</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> ข้อมูลสถิติ <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="dashboard">สถิติการใช้ห้อง</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-legal"></i>ระเบียบการใช้ห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="rulestutor">ห้องติว</a></li>
+                      <li><a href="rulesredhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="ruleslinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3 ng-model="title">{{title}}</h3>
+              </div>             
+            </div>
+            <div class="clearfix"></div>
+            </br>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title" >
+                    <h2 style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;height: 25px;"> ห้องติว (Tutor Rooms)</h2>
+                    <!-- <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                    </ul> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left" novalidate >
+
+                      
+                      <!-- <span class="section"></span> -->
+                      <div class="row align-items-center" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;">
+                        
+                          <div class="col-md-1 col-sm-1 col-xs-12 " align="center"></div>
+                          <div class="col-md-3 col-sm-3 col-xs-12 " align="center" ng-repeat="img in img_path">
+                            <img ng-model="roomsInfo" ng-src="{{img}}" style="height: 100%;width: 100%;" alt="" width="628" height="1024" >
+                          </div>
+                          <!-- <div class="col-md-3 col-sm-3 col-xs-12 " align="center">
+                            <img ng-model="roomsInfo" ng-src="{{roomsInfo.infomations[1].img_path}}" style="height: 80%;width: 80%;" alt="" width="728" height="1024" >
+                          </div>
+                          <div class="col-md-3 col-sm-3 col-xs-12 " align="center">
+                            <img ng-model="roomsInfo" ng-src="{{roomsInfo.infomations[2].img_path}}" style="height: 80%;width: 80%;" alt="" width="768" height="1024" >
+                          </div>  -->
+
+
+                      </div>
+                      </br>
+                      <div class="row align-items-center" >
+                        <div class="col-md-1 col-sm-1 col-xs-12 " style=""></div>
+                        
+                           <div class="col-md-9 col-sm-9 col-xs-12 " style="">
+                              <p style="font-size: 1.05em;" ng-model="roomsInfo">&nbsp;&nbsp;ห้องติวเตอร์ เป็นห้องบริการนักศึกษาและบุคลากรในคณะวิศวกรรมศาสตร์ สำหรับเข้าใช้งานหรือการเรียนรู้เป็นกลุ่ม มีห้องบริการในลักษณะนี้จำนวน 5 ห้อง และมีชื่อเรียกดังนี้</p>
+                           </div>
+                      </div>
+                      <br>
+                      <div class="row align-items-center">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-2">
+                          <!-- required for floating -->
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs tabs-left">
+                            <li class="active"><a href="#ubuntu" data-toggle="tab">ห้อง Ubuntu</a>
+                            </li>
+                            <li><a href="#fedora" data-toggle="tab">ห้อง Fedora</a>
+                            </li>
+                            <li><a href="#cent-os" data-toggle="tab">ห้อง Cent-OS</a>
+                            </li>
+                            <li><a href="#solaris" data-toggle="tab">ห้อง Solaris</a>
+                            </li>
+                            <li><a href="#debian" data-toggle="tab">ห้อง Debian</a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div class="col-xs-7">
+                          <!-- Tab panes -->
+                          <div class="tab-content" >
+                              <div class="tab-pane active" ng-model="details" id="{{details[0].name}}" >
+                                <p class="lead" style="text-transform: capitalize;">{{details[0].name}}</p> 
+                                <!-- <br> -->
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-9">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>อุปกรณ์</th>
+                                        <th>สถานะ</th>
+                                        <!-- <th> </th> -->
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr >
+                                        <th>โต๊ะ</th>
+                                        <th ng-show="details[0].desktop_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="details[0].desktop_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>ปลั๊กไฟ</th>
+                                        <th ng-show="details[0].plug_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="details[0].plug_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>กระดาน</th>
+                                        <th ng-show="details[0].board_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="details[0].board_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>เครื่องปรับอากาศ</th>
+                                        <th ng-show="details[0].air_conditioner_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="details[0].air_conditioner_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>รองรับได้ </th>
+                                        <th>{{details[0].people}}&nbsp;คน</th>                                    
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>                            
+                              </div>
+
+                              <div class="tab-pane" ng-repeat="detail in details" id="{{detail.name}}" >
+                                <p class="lead" style="text-transform: capitalize;">{{detail.name}}</p>
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-9">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>อุปกรณ์</th>
+                                        <th>สถานะ</th>
+                                        <!-- <th> </th> -->
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr >
+                                        <th>โต๊ะ</th>
+                                        <th ng-show="detail.desktop_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="detail.desktop_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>ปลั๊กไฟ</th>
+                                        <th ng-show="detail.plug_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="detail.plug_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>กระดาน</th>
+                                        <th ng-show="detail.board_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="detail.board_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>เครื่องปรับอากาศ</th>
+                                        <th ng-show="detail.air_conditioner_yes"><i class="fa fa-check"></i></th>
+                                        <th ng-show="detail.air_conditioner_no"><i class="fa fa-remove"></i></th>
+                                      </tr>
+                                      <tr >
+                                        <th>รองรับได้ </th>
+                                        <th>{{detail.people}}&nbsp;คน</th>                                    
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>                             
+                              </div>    
+                                                          
+                              <!-- <div class="tab-pane" id="fedora">Fedora</div> -->
+                              <!-- <div class="tab-pane" id="cent-os">Cent-OS</div>
+                              <div class="tab-pane" id="solaris">Solaris</div>
+                              <div class="tab-pane" id="debian">Debian</div>
+                             -->
+                          </div>
+                        </div>
+                      </div> 
+                      <br>
+                      <div class="row align-items-center">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-9">
+                          <p style="font-size: 1.05em;">&nbsp;นักศึกษา หรือบุคลากรที่ต้องการใช้งานห้องติวเตอร์ ต้องมาลงชื่อเพื่อทำการจองห้องตาม<a href="rulestutor">เงื่อนไข</a> ได้ที่บริเวณเคาท์เตอร์ของศูนย์การเรียนรู้</p>
+                        </div>
+                      </div>                   
+
+
+                            
+                          
+
+                      
+
+
+                      
+                      
+                      <div class="ln_solid"></div>
+                      <!-- <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div> -->
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            พัฒนาโดย ศูนย์คอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มจพ. <a href="https://www.ecc.eng.kmutnb.ac.th">(ECC)</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- validator -->
+    <script src="../vendors/validator/validator.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+    <!-- angularjs -->
+    <script src="js/angularjs/angular.min.js"></script>
+    <script src="js/angularjs/angular-route.min.js"></script>
+    <script src="../js/angularjs/angular-animate.js"></script>
+    <script src="../js/angularjs/angular-sanitize.js"></script>
+    <script src="../js/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>     
+
+    <!-- controllers -->
+    <script src="controllers/route.js"></script>
+    <script src="controllers/infoTutor.js"></script>
+  
+  </body>
+</html>

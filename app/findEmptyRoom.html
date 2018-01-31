@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html ng-app="RBSapp" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ระบบจองห้อง </title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">     
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker -->
+    <link href="../vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+   
+    <!-- Bootstrap Colorpicker -->
+    <link href="../vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+    <link href="../vendors/cropper/dist/cropper.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    
+  </head>
+
+  <body class="nav-md">
+    <div class="container body" ng-controller="findRoomCtrl">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="main" class="site_title"><i class="fa fa-book" ng-model="project_title"></i> <span>ระบบจองห้อง</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> หน้าหลัก <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="main">ตารางการใช้ห้อง</a></li>
+                      <li><a href="findemptyroom">ค้นหาห้องว่าง</a></li>
+                      <li><a href="studentauth">จองห้อง</a></li>
+                      <!-- <li><a href="index3.html">Dashboard3</a></li> -->
+                    </ul>
+                  </li>                  
+                  <li><a><i class="fa fa-info-circle"></i> ข้อมูลห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="infotutor">ห้องติว</a></li>
+                      <li><a href="inforedhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="infolinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> ข้อมูลนักศึกษา <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="checkid">ตรวจสอบข้อมูล</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> ข้อมูลสถิติ <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="dashboard">สถิติการใช้ห้อง</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-legal"></i>ระเบียบการใช้ห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="rulestutor">ห้องติว</a></li>
+                      <li><a href="rulesredhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="ruleslinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>             
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 629px;">
+          <!-- <div class=""> -->
+            <div class="page-title">
+              <div class="title_left">
+                <h3>บริการค้นหาห้องว่าง</h3>
+              </div>
+              
+            </div>
+
+            <div class="clearfix"></div>
+            <br>           
+
+            <div class="row">
+            	<div class="col-md-5 col-sm-12 col-xs-12">
+					<div class="x_panel" >
+					    <div class="x_title">
+					        <h2>ระบุวันและเวลา <small> เพื่อค้นหาห้องว่าง</small></h2>
+					        
+					        <div class="clearfix"></div>
+					    </div>
+					    <div class="x_content">
+					    	<br />
+		                    
+
+					        <form class="form-horizontal " >
+					        	<div class="form-group">
+                        			<label class="control-label col-md-3 col-sm-3 col-xs-3">วันที่</label>
+					                <div class="col-md-7 col-sm-7 col-xs-7">			                    
+					                        <div class='input-group date' id='myDatepicker1'>
+					                            <input type='text' class="form-control" />
+					                            <span class="input-group-addon">
+					                               <span class="glyphicon glyphicon-calendar"></span>
+					                            </span>
+					                        </div>			                   
+					                </div>
+					            </div>
+					            <div class="form-group" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;">
+                        			<label class="control-label col-md-3 col-sm-3 col-xs-3" style="padding-top: 0;padding-bottom: 6px;" >เวลาเริ่มต้น</label>  
+                        			<div class="col-md-9 col-sm-9 col-xs-9">              
+					                   
+					                    
+						            	<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+						            </div>
+						        </div>	
+						        <div class="form-group" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;padding-top: 0;">
+						        	<label class="control-label col-md-3 col-sm-3 col-xs-3" style="padding-top: 0;padding-bottom: 6px;">เวลาสิ้นสุด</label>  
+                        			<div class="col-md-9 col-sm-9 col-xs-9"> 			               
+					                    
+					                    
+						            	<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+						            </div>
+						        </div>
+					                
+					            <!-- </div>   -->
+					            <div class="ln_solid"></div>
+					            <div class="form-group">	
+					            	<div class="col-md-9 col-md-offset-9">				                
+					                <!-- <div class='col-md-2' style="position: absolute;bottom: 0;right: 0;"> --> <!-- style="position: absolute;bottom: 0;right: 0;padding-bottom: 6px;" --> <!-- style="display: inline-block;vertical-align: middle;float: none;" -->
+					                	<div class="form-group" >
+					                    	<a class="btn btn-success submit" href="findemptyroom"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;ค้นหา</a>
+					                    </div>
+					            	</div>
+					            </div>
+					       
+					        <!-- </div>	 -->
+					        </form>
+					    </div>
+			    	</div>
+		    	</div>
+
+		    	<div class="col-md-7 col-sm-12 col-xs-12">
+			    	<div class="x_panel" style="" hidden="true">
+					    <div class="x_title">
+					        <h2>ผลการค้นหา </h2>
+					        
+					        <div class="clearfix"></div>
+					    </div>
+					    <div class="x_content">
+					        <div class="container" ng-hide="true">
+					            <div class="row " style="position: relative;">
+					               <div class="jumbotron">
+				                      <font style="font-size: 2.2em;text-align: center;">ไม่พบข้อมูล!</font>
+				                      <p>ระบบไม่พบห้องว่างตามเวลาที่ระบุ  กรุณาเลือกช่วงเวลาใหม่อีกครั้ง</p>
+				                    </div>
+					                    
+					            </div>		                
+					        </div>
+					        <div class="row">
+					        	<div class="col-md-1 col-sm-1 col-xs-12"></div>
+					        	<div class="col-md-9 col-sm-9 col-xs-12">
+					        		<table class="table ">
+				                      <thead>
+				                        <tr>
+				                          <th></th>
+				                          <th>ชื่อห้อง</th>
+				                          <th></th>
+				                          <th></th>
+				                        </tr>
+				                      </thead>
+				                      <tbody>
+				                        <tr>
+				                          <th scope="row">1</th>
+				                          <td valign="center" ><a class="btn btn-primary" style="background-color: #7F61BA;border: none;">&nbsp;&nbsp;Ubuntu&nbsp;&nbsp;</a></td>
+				                          <td align="" ="center"><a href="#">รายละเอียดห้อง</a> </td>
+				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
+				                        </tr>
+				                        <tr>
+				                          <th scope="row">2</th>
+				                          <td><a class="btn btn-primary" style="background-color: #5bc0de;border: none;">&nbsp;&nbsp;Fedora&nbsp;&nbsp;</a></td>
+				                          <td><a href="#">รายละเอียดห้อง</a></td>
+				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
+				                        </tr>
+				                        <tr>
+				                          <th scope="row">3</th>
+				                          <td><a class="btn btn-primary" style="background-color: #337ab7;border: none;">&nbsp;Cent-OS&nbsp;</a></td>
+				                          <td><a href="#">รายละเอียดห้อง</a></td>
+				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
+				                        </tr>
+				                        <tr>
+				                          <th scope="row">4</th>
+				                          <td><a class="btn btn-primary" style="background-color: #f0ad4e;border: none;">&nbsp;&nbsp;Solaris&nbsp;&nbsp;</a></td>
+				                          <td><a href="#">รายละเอียดห้อง</a></td>
+				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
+				                        </tr>
+				                        <tr>
+				                          <th scope="row">5</th>
+				                          <td><a class="btn btn-primary" style="background-color: #26b99a;border: none;">&nbsp;&nbsp;Debian&nbsp;&nbsp;</a></td>
+				                          <td><a href="#">รายละเอียดห้อง</a></td>
+				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
+				                        </tr>
+				                      </tbody>
+				                    </table>
+					        	</div>
+					        </div>
+					            
+					    </div>
+			    	</div>
+			    </div>
+
+	    	</div>
+
+	    	
+
+	    	
+
+
+	<!-- </div> -->
+                <!-- /form datetimepicker -->
+
+                
+         
+       
+         </div>
+       <!-- </div>
+	  </div> -->
+	
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            พัฒนาโดย ศูนย์คอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มจพ. <a href="https://www.ecc.eng.kmutnb.ac.th">(ECC)</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->    
+    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+
+   
+    <!-- Ion.RangeSlider -->
+    
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+    <script src="../js/angularjs/angular.min.js"></script>
+    <script src="../js/angularjs/angular-route.min.js"></script>
+    <script src="../js/angularjs/angular-animate.js"></script>
+  	<script src="../js/angularjs/angular-sanitize.js"></script>
+  	<script src="../js/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+  	<!-- <script src="../js/timepicker/position.js"></script>
+	<script src="../js/timepicker/timepicker.js"></script>
+	<script src="../js/timepicker/timepicker-tpl.js"></script>
+	<script src="../js/timepicker/psTimePicker.js"></script> -->
+    <script src="controllers/route.js"></script>
+    <script src="controllers/findEmptyRoom.js"></script>
+    
+    <!-- Initialize datetimepicker -->
+<script>
+    $('#myDatepicker').datetimepicker();
+    
+    $('#myDatepicker1').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    
+    $('#myDatepicker2').datetimepicker({
+        format: 'hh:mm A',       
+        
+    });
+    $('#myDatepicker3').datetimepicker({
+        format: 'hh:mm A'
+    });
+    
+   
+</script>
+  </body>
+</html>

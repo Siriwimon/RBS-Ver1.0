@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html ng-app="RBSapp"lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ระบบจองห้อง</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div ng-controller="checkidCtrl" class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-book"></i> <span>ระบบจองห้อง</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+            
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- <h3>General</h3> -->
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> หน้าหลัก <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="main">ตารางการใช้ห้อง</a></li>
+                      <li><a href="findemptyroom">ค้นหาห้องว่าง</a></li>
+                      <li><a href="studentauth">จองห้อง</a></li>
+                      <!-- <li><a href="index3.html">Dashboard3</a></li> -->
+                    </ul>
+                  </li>                  
+                  <li><a><i class="fa fa-info-circle"></i> ข้อมูลห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="infotutor">ห้องติว</a></li>
+                      <li><a href="inforedhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="infolinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> ข้อมูลนักศึกษา <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="checkid">ตรวจสอบข้อมูล</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> ข้อมูลสถิติ <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="dashboard">สถิติการใช้ห้อง</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-legal"></i>ระเบียบการใช้ห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="rulestutor">ห้องติว</a></li>
+                      <li><a href="rulesredhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="ruleslinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>ตรวจสอบข้อมูล</h3>
+              </div>             
+            </div>
+            <div class="clearfix"></div>
+            </br>
+
+            <div class="row">
+              <div class="col-md-5 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2> การใช้งานเครื่องอ่าน RFID และเครื่องสแกนบาร์โค้ด </h2><!-- <small>sub title</small> -->
+                    <!-- <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                    </ul> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left" novalidate>
+
+                      
+                      <!-- <span class="section"></span> -->
+                      <div class="row align-items-center" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;">
+                        
+                          
+                          <div class="col-md-6 col-sm-6 col-xs-12 ">
+                            <img src="images/barcode.jpg" style="height: 70%;width: 70%;" alt="" width="238" height="250">
+                          </div>
+                          
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-12 " style="">
+                          ใช้เครื่องบาร์โค้ดสแกนเนอร์ อ่านแถบบาร์โค้ดหลังบัตรนักศึกษา
+                          </div>
+                      </div>
+                      <div class="row align-items-center" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;">
+                        
+                          
+                          <div class="col-md-6 col-sm-6 col-xs-12 " style="">
+                            <img src="images/RFID.png" style="height: 70%;width: 70%;" alt="" width="238" height="250">
+                          </div>
+                          
+                        
+                        <div class="col-md-6 col-sm-6 col-xs-12 " style="">
+                          นำบัตรนักศึกษาแตะที่เครื่องอ่าน RFID
+                          </div>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      <!-- <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                      </div> -->
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>ตรวจสอบรหัสนักศึกษา </h2><!-- <small>sub title</small> -->
+                    <!-- <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                    </ul> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left" novalidate>
+
+                      <p>กรุณาแตะบัตรนักศึกษาที่เครื่องอ่าน RFID หรือใช้เครื่องสแกนบาร์โค้ด</a>
+                      </p>
+                      <span class="section"></span>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="id">รหัส น.ศ./ RFID<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="id" class="form-control col-md-7 col-xs-12" data-validate-length-range="13"  name="id" placeholder="6001010000001"  type="text"> <!-- required="required" -->
+                        </div>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-7 col-md-offset-4">
+                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <a class="btn btn-success submit" href="booking">Submit</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-7 col-sm-12 col-xs-12" ng-show="false">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>ผลการตรวจสอบ </h2><!-- <small>sub title</small> -->
+                    <!-- <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                    </ul> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left" novalidate ng-show="false">
+
+                      <p>ผลการค้นหาข้อมูลนักศึกษา</a>
+                      </p>
+                      <span class="section"></span>
+
+                      <h1> ไม่พบผลลัพธ์</h1>
+                      <p>กรุณาติดต่อเจ้าหน้าที่ศูนย์คอมพิวเตอร์</p>
+                      
+                      <div class="ln_solid"></div>
+                      <!-- <div class="form-group">
+                        <div class="col-md-7 col-md-offset-4">
+                          <button type="submit" class="btn btn-primary">Cancel</button>
+                          <a class="btn btn-success submit" href="booking">Submit</a>
+                        </div>
+                      </div> -->
+                    </form>
+
+                    <form class="form-horizontal form-label-left" novalidate ng-show="false">
+
+                      <p>ผลการค้นหาข้อมูลนักศึกษา</a>
+                      </p>
+                      <span class="section"></span>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="resultID">รหัสนักศึกษา
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="resultID" class="form-control col-md-7 col-xs-12" data-validate-length-range="13"  name="resultID"  type="text">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">ชื่อ - นามสกุล
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="13"  name="name"  type="text">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="department">ภาควิฃา
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="department" class="form-control col-md-7 col-xs-12" data-validate-length-range="13"  name="department"  type="text">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="faculty">คณะ
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="faculty" class="form-control col-md-7 col-xs-12" data-validate-length-range="13"  name="faculty"  type="text">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="item form-group">
+                        <p align="center">*หากข้อมูลไม่ถูกต้อง กรุณาติดต่อเจ้าหน้าที่ศูนย์คอมพิวเตอร์</p>
+                      </div>
+
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-7 col-md-offset-4">
+                          <button type="submit" class="btn btn-primary">Clear</button>
+                          <a class="btn btn-success submit" href="booking">จองห้อง</a>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            พัฒนาโดย ศูนย์คอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มจพ. <a href="https://www.ecc.eng.kmutnb.ac.th">(ECC)</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- validator -->
+    <script src="../vendors/validator/validator.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+    <!-- angularjs -->
+    <script src="js/angularjs/angular.min.js"></script>
+    <script src="js/angularjs/angular-route.min.js"></script> 
+    <script src="../js/angularjs/angular-animate.js"></script>
+    <script src="../js/angularjs/angular-sanitize.js"></script>
+    <script src="../js/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>  
+
+    <!-- controllers -->
+    <script src="controllers/route.js"></script>
+    <script src="controllers/checkID.js"></script>
+	
+  </body>
+</html>

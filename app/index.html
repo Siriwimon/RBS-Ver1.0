@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html ng-app="RBSCalapp" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ระบบจองห้อง </title>
+
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>    
+    <!-- bootstrap-datetimepicker -->
+    <link href="../vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="build/css/custom.min.css" rel="stylesheet">
+    <link href='css/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+	<link href='css/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	<link href='js/fullcalendarjs/scheduler.min.css' rel='stylesheet'>
+
+
+	
+
+  </head>
+
+  <body class="nav-md">
+    <div ng-controller="indexCtrl" class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="main" class="site_title"><i class="fa fa-book" ng-model="project_title"></i> <span>{{project_title}}</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <!-- <div class="profile clearfix"> -->
+              
+            <!-- </div> -->
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- <h3>General</h3> -->
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> หน้าหลัก <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="main">ตารางการใช้ห้อง</a></li>
+                      <li><a href="findemptyroom">ค้นหาห้องว่าง</a></li>
+                      <li><a href="studentauth">จองห้อง</a></li>
+                      <!-- <li><a href="index3.html">Dashboard3</a></li> -->
+                    </ul>
+                  </li>                  
+                  <li><a><i class="fa fa-info-circle"></i> ข้อมูลห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="infotutor">ห้องติว</a></li>
+                      <li><a href="inforedhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="infolinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> ข้อมูลนักศึกษา <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="checkid">ตรวจสอบข้อมูล</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> ข้อมูลสถิติ <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="dashboard">สถิติการใช้ห้อง</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-legal"></i>ระเบียบการใช้ห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="rulestutor">ห้องติว</a></li>
+                      <li><a href="rulesredhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="ruleslinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="menu_section">
+                
+              </div> -->
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+            	
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">                 
+          <br />
+          <div class="row">
+          	
+          	<div class="col-md-12 col-sm-12 col-xs-12">
+	          	<div class="dashboard_graph">
+	          		<div class="row x_title">
+	                  <div class="col-md-6">
+	                    <h3>ตารางการจองห้อง <small>ภายในศูนย์คอมพิวเตอร์</small></h3>
+		                
+	                  </div>
+	                  
+	                  <div class="col-md-6">
+	                    <ul class="nav navbar-right ">
+	                      	<a class="btn btn-success submit" href="findemptyroom"><i class="fa fa-calendar-o"></i>&nbsp;&nbsp;ค้นหาห้องว่าง</a>
+                    		<a class="btn btn-primary submit" href="studentauth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+	                    </ul>
+	                  </div>
+	                </div>
+	                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+	                  	<div id="calendar" class="demo-placeholder"></div>
+	                </div> -->
+	                <div class="x_content">
+                      <div class="dashboard-widget-content">
+                        
+                        <div id="calendar1" class="col-md-12 col-sm-12 col-xs-12" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="eventSources" calendar="calendar"></div>
+                      </div>
+                    </div>
+	            	<div class="clearfix"></div>
+		        </div>
+
+          	</div>
+          </div>
+
+
+          <!-- <br />   -->
+
+                    
+        <!-- /page content -->
+
+        <!-- footer content -->
+        </div>
+        <footer>
+          <div class="pull-right">
+            พัฒนาโดย ศูนย์คอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มจพ. <a href="https://www.ecc.eng.kmutnb.ac.th">(ECC)</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->    
+    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src='js/moment/moment.min.js'></script>	
+    <!-- <script src="../vendors/moment/min/moment.min.js"></script> -->
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+    <!-- chrome bug with Slow network is detected. Fallback font will be used while loading:  /bootstrap/dist/fonts/glyphicons-halflings-regular.woff2 
+    edit by Goto chrome://flags/#enable-webfonts-intervention-v2 and set it to disabled
+    from https://stackoverflow.com/questions/42342133/slow-network-is-detected-fallback-font-will-be-used-while-loading-angular-app -->
+
+    <!-- custom script -->
+    <script src="js/angularjs/angular.min.js"></script>
+    <script src="js/angularjs/angular-route.min.js"></script>   
+    <script src="js/angularjs/calendar.min.js"></script> 
+    <script src="js/angularjs/angular-animate.js"></script>
+    <script src="js/angularjs/angular-sanitize.js"></script>
+    
+	<!-- <script src='js/jquery-3.2.1/jquery.min.js'></script> -->
+	<script src='js/fullcalendarjs/fullcalendar.min.js'></script>	
+	<script src='js/fullcalendarjs/scheduler.min.js'></script>
+
+	<!-- controllers -->
+	<script src="controllers/calendarApp.js"></script>
+    <script src="controllers/main.js"></script>
+    <script type="text/javascript">
+    	$('#myDatepicker2').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
+    </script>
+
+
+	
+  </body>
+</html>
