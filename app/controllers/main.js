@@ -1,4 +1,4 @@
-CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log','$compile',function($scope,$http,$filter,$timeout,$log,$compile,uiCalendarConfig) {
+CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log','$compile','$sce',function($scope,$http,$filter,$timeout,$log,$compile,$sce,uiCalendarConfig) {
 	// body...
 	$scope.project_title = "ระบบจองห้อง";
 	var events = [];
@@ -65,14 +65,11 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			],
 
 			viewRender: function(view, element) {
-		    	// console.log(view);
-		    	// console.log(events);	    	
+		    	   	
 		    	viewStart = $filter('date')(view.intervalStart._d, "yyyy-MM-dd");
-	    		viewEnd = $filter('date')(view.intervalEnd._d, "yyyy-MM-dd");
-	    		
+	    		viewEnd = $filter('date')(view.intervalEnd._d, "yyyy-MM-dd");    		
 		    	
-		    	renderEvents(viewStart,viewEnd);
-		    	
+		    	renderEvents(viewStart,viewEnd);    	
 
 	        },
 			eventRender: function(event, element, view){
@@ -126,7 +123,9 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 
 	$scope.eventRender = function(event, element ,view){		
 		// console.log("eventRender")
-		element.attr({'uib-tooltip': event.title,'uibtooltip-append-to-body': true}); //fix bug https://github.com/angular-ui/ui-calendar/issues/357
+		text = $sce.trustAsHtml('ผู้จอง: '+ event.title  + '\nเวลา: '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm"))
+
+		element.attr({'uib-tooltip': text,'uibtooltip-append-to-body': true}); //fix bug https://github.com/angular-ui/ui-calendar/issues/357
         $compile(element)($scope);
   			
   		
