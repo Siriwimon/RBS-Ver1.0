@@ -2,37 +2,64 @@
 // Auth Siriwimon Sunthon
 // Engineering Computer Center
 
-// ========== server.js ============
-// var express  = require('express');
-// var app      = express();
-// var port     = process.env.PORT || 3000;
-var bodyParser = require('body-parser');
+// ========== app.js ============
+// stop global mongodb
+// $ systemctl stop mongod
+// start local mongodb
+// $ mongod --storageEngine=mmapv1 --dbpath /home/jaa/Documents/Computer\ Center/Room-Booking/data/
+// db.createUser({user:"test-admin",pwd:"test1234",roles:[{role: "dbOwner",db:"test-RBS"}]})
 
-// app.use('/',express.static(__dirname + "/app"));
-// // app.use('/administrator',express.static(__dirname + "/administrator"));
+var mongojs = require('mongojs');			
+var db = mongojs('test-RBS',['test-RBS']);
 
+// var moment = require('moment');
+// var dbCollections = ["queueRequest","serviceRecord"];
 
-// app.set('views', __dirname + '/app');
-// app.engine('html', require('ejs').renderFile);
-// app.set('view engine', 'html');
+var moment = require('moment-timezone');
+// var schedule = require('node-schedule');
+
 
 module.exports = function(app) {
+
 
 	// ============================= user ===================================
 	// ============ begin of main page ==============
 	// show calendar of booking rooms
 
-	app.get('/main', function (req,res){
+	app.get('/', function (req,res){
 		// res.sendFile('index.html',{root : __dirname + '/app'});
-		res.redirect('/');
+		//res.redirect('/main');
+		console.log("OK")
 		
 
 	});
-	app.get('/main/test', function (req,res){
-		
-		// res.sendFile('home.html',{root : __dirname + '/roombooking/main'});
-		// res.json("Main test is ok!!");
+
+	app.get('/main', function (req,res){
+		//res.sendFile('index.html',{root : __dirname + '/app'});
 		res.redirect('/');
+		// console.log("main")
+		// db.events.find(function (err, docs){
+		// 	console.log(docs);
+		// 	res.json(docs);
+		// });
+	});
+
+	app.get('/main/render', function (req,res){		
+		
+		db.events.find(function (err, docs){
+			//console.log(docs);
+			docs.forEach(function(doc){
+				
+				start = doc.start;
+				end = doc.end;
+			    doc.start = moment.tz(start,"Asia/Bangkok").format();
+			    doc.end = moment.tz(end,"Asia/Bangkok").format();
+			    console.log(doc.start);
+			});
+
+
+			res.json(docs);
+		});
 	});
 
 	// ============ end of main page  ==============

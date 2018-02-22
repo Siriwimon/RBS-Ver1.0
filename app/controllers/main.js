@@ -1,27 +1,27 @@
-CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log',function($scope,$http,$filter,$timeout,$log,uiCalendarConfig) {
+CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log','$compile',function($scope,$http,$filter,$timeout,$log,$compile,uiCalendarConfig) {
 	// body...
 	$scope.project_title = "ระบบจองห้อง";
-	$scope.events = [];
+	var events = [];
 
-	events = [
-		{ id: '1', resourceId: 'a1', start: '2017-11-07T10:00:00', end: '2017-10-07T12:00:00', title: 'event 1' },
-		{ id: '2', resourceId: 'a2', start: '2017-11-07T11:00:00', end: '2017-10-07T13:00:00', title: 'event 2' },
-		{ id: '3', resourceId: 'a3', start: '2017-11-07T09:00:00', end: '2017-10-07T12:00:00', title: 'event 3' },
-		{ id: '4', resourceId: 'a4', start: '2017-11-07T15:00:00', end: '2017-10-07T17:00:00', title: 'event 4' },
-		{ id: '5', resourceId: 'a5', start: '2017-11-07T13:30:00', end: '2017-10-07T15:30:00', title: 'event 5' },
-		{ id: '6', resourceId: 'b1', start: '2017-11-07T09:30:00', end: '2017-10-07T12:00:00', title: 'event 6' },
-		{ id: '7', resourceId: 'c1', start: '2017-11-07T10:30:00', end: '2017-10-07T13:30:00', title: 'event 7' }
-	]
+	// events = [
+	// 	{ id: '1', resourceId: 't1', start: '2018-02-20T10:00:00', end: '2018-02-20T12:00:00', title: 'event 1' },
+	// 	{ id: '2', resourceId: 't2', start: '2018-02-20T11:00:00', end: '2018-02-20T13:00:00', title: 'event 2' },
+	// 	{ id: '3', resourceId: 't3', start: '2018-02-20T09:00:00', end: '2018-02-20T12:00:00', title: 'event 3' },
+	// 	{ id: '4', resourceId: 't4', start: '2018-02-20T15:00:00', end: '2018-02-20T17:00:00', title: 'event 4' },
+	// 	{ id: '5', resourceId: 't5', start: '2018-02-20T13:30:00', end: '2018-02-20T15:30:00', title: 'event 5' },
+	// 	{ id: '6', resourceId: 'r1', start: '2018-02-20T09:30:00', end: '2018-02-20T12:00:00', title: 'event 6' },
+	// 	{ id: '7', resourceId: 'u1', start: '2018-02-20T10:30:00', end: '2018-02-20T13:30:00', title: 'event 7' }
+	// ]
 
 	
 		
-	$scope.events.push.apply($scope.events,events);
-	console.log($scope.events)
+	// $scope.events.push.apply($scope.events,events);
+	// console.log($scope.events)
 
 	$scope.uiConfig = {
 	  	calendar:{
 	  		schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
-	  		now: '2017-11-07',
+	  		// now: '2018-02-20',
 		    selectable: true,
 		    selectHelper: true,
 		    editable: false,
@@ -43,41 +43,55 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 					duration: { days: 3 }
 				}
 			},
-			resourceAreaWidth: "29%",
+			resourceAreaWidth: "39%",
 			resourceLabelText: 'Rooms',
-		    // events: $scope.events,
+		    // events: $scope.events,		    
 		    resources: [
-				{ id: 'a', title: 'ห้องติว', children: [
-					{ id: 'a1', title: 'ubuntu', eventColor: '#7F61BA'},
-					{ id: 'a2', title: 'cent-OS', eventColor: '#337AB7'},
-					{ id: 'a3', title: 'fedora', eventColor: '#5BC0DE'},
-					{ id: 'a4', title: 'solaris', eventColor: '#F0AD4E'},
-					{ id: 'a5', title: 'debian', eventColor: '#26B99A'}
+				{ id: 't', title: 'ห้องติว', children: [
+					{ id: 't1', title: 'ubuntu', eventColor: '#7F61BA'},
+					{ id: 't2', title: 'cent-OS', eventColor: '#337AB7'},
+					{ id: 't3', title: 'fedora', eventColor: '#5BC0DE'},
+					{ id: 't4', title: 'solaris', eventColor: '#F0AD4E'},
+					{ id: 't5', title: 'debian', eventColor: '#26B99A'}
 				] },
-				{ id: 'b', title: 'ห้องบริการบุคลากร/ น.ศ.โท-เอก', children:[
-					{ id: 'b1', title: 'redhat', eventColor:'#DA534F'}
+				{ id: 'r', title: 'ห้องบริการบุคลากร/ น.ศ.โท-เอก', children:[
+					{ id: 'r1', title: 'redhat', eventColor:'#DA534F'}
 				] },				
-				{ id: 'c', title: 'ห้องบริการเพื่อการเรียนรู้', children: [
-					{ id: 'c1', title: 'linux', eventColor:'#F27E40'}
+				{ id: 'u', title: 'ห้องบริการเพื่อการเรียนรู้', children: [
+					{ id: 'u1', title: 'linux', eventColor:'#F27E40'}
 					
 				] }
 				
-			]
+			],
+
+			viewRender: function(view, element) {
+		    	// console.log(view);
+		    	// console.log(events);	    	
+		    	
+		    	
+		    	renderEvents();
+		    	
+
+	        },
+			eventRender: function(event, element, view){
+	    		$scope.eventRender(event, element, view);
+	    	},
 			
 		  
 		}
 			
   	};
 
-  	$scope.eventSources = [events];
+  	// $scope.eventSources = [events];
 
 
 
-	$scope.main = function(){
-		$http.get('/main').then(successCallback,errorCallback);
-
+	var main = function(){
+		$http.get('/').then(successCallback,errorCallback);
+		
 		function successCallback(response){
-			console.log("OK! main");
+			$scope.test = response;
+			console.log($scope.test);
 			
 		};		
 
@@ -86,12 +100,17 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		};
 	}
 
-	$scope.mainroute = function(){
-		$http.get('/main/test').then(successCallback,errorCallback);
+	
 
+	var renderEvents = function(){
+		
+		$http.get('/main/render').then(successCallback,errorCallback);
+		events.splice(0,events.length);		
 		function successCallback(response){
-			console.log("OK! main");
-			$scope.test = response.data;
+			
+			test = response.data;
+			
+			events.push.apply(events,test);
 			
 		};		
 
@@ -100,5 +119,21 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		};
 	}
 
-	$scope.eventSources = [$scope.events]
+	$scope.eventRender = function(event, element ,view){		
+		// console.log("eventRender")
+		element.attr({'uib-tooltip': event.title,'uibtooltip-append-to-body': true}); //fix bug https://github.com/angular-ui/ui-calendar/issues/357
+        $compile(element)($scope);
+  			
+  		
+	};
+
+	
+
+	//renderEvents();
+	console.log(events)
+	
+	//$scope.renderEvents();
+	$scope.eventSources = [events];
+
+	// $scope.eventSources = [$scope.events]
 }]);
