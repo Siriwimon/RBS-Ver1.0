@@ -37,28 +37,35 @@ module.exports = function(app) {
 	app.get('/main', function (req,res){
 		//res.sendFile('index.html',{root : __dirname + '/app'});
 		res.redirect('/');
-		// console.log("main")
-		// db.events.find(function (err, docs){
-		// 	console.log(docs);
-		// 	res.json(docs);
-		// });
+		
 	});
 
-	app.get('/main/render', function (req,res){		
+	app.get('/main/render/:text', function (req,res){	
+		var text = req.params.text;
+		var viewTime = text.split(',');
+		var viewStart = new Date(viewTime[0]);
+		var viewEnd = new Date(viewTime[1]);	
 		
-		db.events.find(function (err, docs){
+		db.events.find(
+			{start : {$gte: viewStart,$lte: viewEnd}}
+		).toArray(function (err, docs){
 			//console.log(docs);
-			docs.forEach(function(doc){
-				
-				start = doc.start;
-				end = doc.end;
-			    doc.start = moment.tz(start,"Asia/Bangkok").format();
-			    doc.end = moment.tz(end,"Asia/Bangkok").format();
-			    console.log(doc.start);
-			});
+
+			if(err){
+				res.json([]);
+			}else{
+				docs.forEach(function(doc){
+					
+					start = doc.start;
+					end = doc.end;
+				    doc.start = moment.tz(start,"Asia/Bangkok").format();
+				    doc.end = moment.tz(end,"Asia/Bangkok").format();
+				    
+				});
 
 
-			res.json(docs);
+				res.json(docs);
+			}
 		});
 	});
 

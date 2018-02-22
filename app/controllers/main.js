@@ -43,7 +43,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 					duration: { days: 3 }
 				}
 			},
-			resourceAreaWidth: "39%",
+			resourceAreaWidth: "29%",
 			resourceLabelText: 'Rooms',
 		    // events: $scope.events,		    
 		    resources: [
@@ -67,9 +67,11 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			viewRender: function(view, element) {
 		    	// console.log(view);
 		    	// console.log(events);	    	
+		    	viewStart = $filter('date')(view.intervalStart._d, "yyyy-MM-dd");
+	    		viewEnd = $filter('date')(view.intervalEnd._d, "yyyy-MM-dd");
+	    		
 		    	
-		    	
-		    	renderEvents();
+		    	renderEvents(viewStart,viewEnd);
 		    	
 
 	        },
@@ -102,15 +104,18 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 
 	
 
-	var renderEvents = function(){
-		
-		$http.get('/main/render').then(successCallback,errorCallback);
-		events.splice(0,events.length);		
+	var renderEvents = function(start,end){
+
+		viewTime = [start,end]
+		events.splice(0,events.length);	
+
+		$http.get('/main/render/' + viewTime).then(successCallback,errorCallback);
+			
 		function successCallback(response){
 			
-			test = response.data;
+			data = response.data;
 			
-			events.push.apply(events,test);
+			events.push.apply(events,data);
 			
 		};		
 
