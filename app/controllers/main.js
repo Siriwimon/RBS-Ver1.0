@@ -75,7 +75,9 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			eventRender: function(event, element, view){
 	    		$scope.eventRender(event, element, view);
 	    	},
-			
+			eventClick: function(event, jsEvent, view){
+	    		$scope.eventClick(event,jsEvent,view)
+	    	}
 		  
 		}
 			
@@ -97,9 +99,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		function errorCallback(error){
 			console.log(error);
 		};
-	}
-
-	
+	}	
 
 	var renderEvents = function(start,end){
 
@@ -131,6 +131,43 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
   		
 	};
 
+	$scope.eventClick = function(event, jsEvent, view){
+		swal({
+		  title: 'รายละเอียดการใช้ห้อง',
+		  //text: "You won't be able to revert this!",
+		  html: '<table id="table" border=0 width=100% align="center"> ' + 
+		            '<tbody><tr bgcolor="#eff5f5">' +
+		            	'<td align="left"> รหัสนักศึกษา </td>' +
+		            	'<td> '+ event.title + '</td>' +
+		            '</tr></tbody>'+
+		            '<tbody><tr>' +
+		            	'<td align="left"> วันที่จอง </td>' +
+		            	'<td> '+ $filter('date')(event.start._i, "yyyy-MM-dd") + '</td>' +
+		            '</tr></tbody>'+
+		            '<tbody><tr bgcolor="#eff5f5">' +
+		            	'<td align="left"> เวลาที่จอง </td>' +
+		            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
+		            '</tr></tbody>'+
+		        '</table>',		  
+		  type: '',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes, delete it!'
+		}).then(
+		   function(result){
+		       if (result) {
+				    swal(
+				      'Deleted!',
+				      'Your file has been deleted.',
+				      'success'
+				    )
+				  }
+		   },function(dismiss){
+		   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
+		   }
+		)
+	}
 	
 
 	//renderEvents();
