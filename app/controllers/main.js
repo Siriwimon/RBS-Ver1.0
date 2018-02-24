@@ -1,22 +1,7 @@
 CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log','$compile','$sce',function($scope,$http,$filter,$timeout,$log,$compile,$sce,uiCalendarConfig) {
 	// body...
 	$scope.project_title = "ระบบจองห้อง";
-	var events = [];
-
-	// events = [
-	// 	{ id: '1', resourceId: 't1', start: '2018-02-20T10:00:00', end: '2018-02-20T12:00:00', title: 'event 1' },
-	// 	{ id: '2', resourceId: 't2', start: '2018-02-20T11:00:00', end: '2018-02-20T13:00:00', title: 'event 2' },
-	// 	{ id: '3', resourceId: 't3', start: '2018-02-20T09:00:00', end: '2018-02-20T12:00:00', title: 'event 3' },
-	// 	{ id: '4', resourceId: 't4', start: '2018-02-20T15:00:00', end: '2018-02-20T17:00:00', title: 'event 4' },
-	// 	{ id: '5', resourceId: 't5', start: '2018-02-20T13:30:00', end: '2018-02-20T15:30:00', title: 'event 5' },
-	// 	{ id: '6', resourceId: 'r1', start: '2018-02-20T09:30:00', end: '2018-02-20T12:00:00', title: 'event 6' },
-	// 	{ id: '7', resourceId: 'u1', start: '2018-02-20T10:30:00', end: '2018-02-20T13:30:00', title: 'event 7' }
-	// ]
-
-	
-		
-	// $scope.events.push.apply($scope.events,events);
-	// console.log($scope.events)
+	var events = [];	
 
 	$scope.uiConfig = {
 	  	calendar:{
@@ -69,7 +54,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		    	viewStart = $filter('date')(view.intervalStart._d, "yyyy-MM-dd");
 	    		viewEnd = $filter('date')(view.intervalEnd._d, "yyyy-MM-dd");    		
 		    	
-		    	renderEvents(viewStart,viewEnd);    	
+		    	$scope.viewRender(viewStart,viewEnd);    	
 
 	        },
 			eventRender: function(event, element, view){
@@ -101,7 +86,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		};
 	}	
 
-	var renderEvents = function(start,end){
+	$scope.viewRender = function(start,end){
 
 		viewTime = [start,end]
 		events.splice(0,events.length);	
@@ -132,6 +117,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	};
 
 	$scope.eventClick = function(event, jsEvent, view){
+		console.log()
 		swal({
 		  title: 'รายละเอียดการใช้ห้อง',
 		  //text: "You won't be able to revert this!",
@@ -153,28 +139,71 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!'
+		  confirmButtonText: 'Delete it!'
 		}).then(
 		   function(result){
-		       if (result) {
-				    swal(
-				      'Deleted!',
-				      'Your file has been deleted.',
-				      'success'
-				    )
+		   	swal.setDefaults({
+		   	  
+			  confirmButtonText: 'ยืนยัน &rarr;',
+			  showCancelButton: true,
+			  // progressSteps: ['1', '2', '3']
+			})
+
+			var steps = [
+			  { 
+			  	input: 'text',
+			    title: 'รายละเอียดการใช้ห้อง',
+				  //text: "You won't be able to revert this!",
+				html: '<table id="table" border=0 width=100% align="center"> ' + 
+			            '<tbody><tr bgcolor="#eff5f5">' +
+			            	'<td align="left"> รหัสนักศึกษา </td>' +
+			            	'<td> '+ event.title + '</td>' +
+			            '</tr></tbody>'+
+			            '<tbody><tr>' +
+			            	'<td align="left"> วันที่จอง </td>' +
+			            	'<td> '+ $filter('date')(event.start._i, "yyyy-MM-dd") + '</td>' +
+			            '</tr></tbody>'+
+			            '<tbody><tr bgcolor="#eff5f5">' +
+			            	'<td align="left"> เวลาที่จอง </td>' +
+			            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
+			            '</tr></tbody>'+
+			        '</table><br>'+
+			        'กรุณากรอกรหัสนักศึกษาเพื่อยืนยันการลบข้อมูล',
+				  
+			  }
+			  
+			]
+
+			swal.queue(steps).then(
+				function(result) {
+				  swal.resetDefaults()
+
+				  if (result) {
+				    swal({
+				      title: 'สำเร็จ!',
+				      type: 'success',
+				      html:
+				        'ลบรายการจองวันที่ ' + $filter('date')(event.start._i, "yyyy-MM-dd")+' เวลา' + $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm")+
+				        '<br> โดยผู้ใช้รหัส '+result +
+				        '<br>เรียบร้อยแล้ว',
+				      confirmButtonText: 'ตกลง'
+				    })
 				  }
+				},function(dismiss){
+			   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
+			    } 
+			)
+		    
 		   },function(dismiss){
 		   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
 		   }
 		)
 	}
 	
-
-	//renderEvents();
 	console.log(events)
 	
 	//$scope.renderEvents();
 	$scope.eventSources = [events];
 
-	// $scope.eventSources = [$scope.events]
+	
 }]);
