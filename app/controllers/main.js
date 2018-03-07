@@ -7,6 +7,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	  	calendar:{
 	  		schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
 	  		// now: '2018-02-20',
+	  		//allDaySlot:true,
 		    selectable: true,
 		    selectHelper: true,
 		    editable: false,
@@ -98,7 +99,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			data = response.data;
 			
 			events.push.apply(events,data);
-			
+			// console.log(events);
 		};		
 
 		function errorCallback(error){
@@ -107,56 +108,30 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	}
 
 	$scope.eventRender = function(event, element ,view){		
-		// console.log("eventRender")
-		text = $sce.trustAsHtml('ผู้จอง: '+ event.title  + '\nเวลา: '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm"))
+		//console.log(event)
+		if(event.end){
+			text = $sce.trustAsHtml(event.title  + '\nเวลา: '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm"))
 
-		element.attr({'uib-tooltip': text,'uibtooltip-append-to-body': true}); //fix bug https://github.com/angular-ui/ui-calendar/issues/357
-        $compile(element)($scope);
-  			
+			element.attr({'uib-tooltip': text,'uibtooltip-append-to-body': true}); //fix bug https://github.com/angular-ui/ui-calendar/issues/357
+	        $compile(element)($scope);
+  	    }else{
+  	    	text = $sce.trustAsHtml(event.title);
+
+			element.attr({'uib-tooltip': text,'uibtooltip-append-to-body': true}); //fix bug https://github.com/angular-ui/ui-calendar/issues/357
+	        $compile(element)($scope);
+  	    }
   		
 	};
 
 	$scope.eventClick = function(event, jsEvent, view){
-		console.log()
-		swal({
-		  title: 'รายละเอียดการใช้ห้อง',
-		  //text: "You won't be able to revert this!",
-		  html: '<table id="table" border=0 width=100% align="center"> ' + 
-		            '<tbody><tr bgcolor="#eff5f5">' +
-		            	'<td align="left"> รหัสนักศึกษา </td>' +
-		            	'<td> '+ event.title + '</td>' +
-		            '</tr></tbody>'+
-		            '<tbody><tr>' +
-		            	'<td align="left"> วันที่จอง </td>' +
-		            	'<td> '+ $filter('date')(event.start._i, "yyyy-MM-dd") + '</td>' +
-		            '</tr></tbody>'+
-		            '<tbody><tr bgcolor="#eff5f5">' +
-		            	'<td align="left"> เวลาที่จอง </td>' +
-		            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
-		            '</tr></tbody>'+
-		        '</table>',		  
-		  type: '',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Delete it!'
-		}).then(
-		   function(result){
-		   	swal.setDefaults({
-		   	  
-			  confirmButtonText: 'ยืนยัน &rarr;',
-			  showCancelButton: true,
-			  // progressSteps: ['1', '2', '3']
-			})
-
-			var steps = [
-			  { 
-			  	input: 'text',
-			    title: 'รายละเอียดการใช้ห้อง',
-				  //text: "You won't be able to revert this!",
-				html: '<table id="table" border=0 width=100% align="center"> ' + 
+		console.log(event)
+		if (event.end){ // && event.status == 0
+			swal({
+			  title: 'รายละเอียดการใช้ห้อง',
+			  //text: "You won't be able to revert this!",
+			  html: '<table id="table" border=0 width=100% align="center"> ' + 
 			            '<tbody><tr bgcolor="#eff5f5">' +
-			            	'<td align="left"> รหัสนักศึกษา </td>' +
+			            	'<td align="left"> ผู้จอง </td>' +
 			            	'<td> '+ event.title + '</td>' +
 			            '</tr></tbody>'+
 			            '<tbody><tr>' +
@@ -167,37 +142,71 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			            	'<td align="left"> เวลาที่จอง </td>' +
 			            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
 			            '</tr></tbody>'+
-			        '</table><br>'+
-			        'กรุณากรอกรหัสนักศึกษาเพื่อยืนยันการลบข้อมูล',
-				  
-			  }
-			  
-			]
+			        '</table>',		  
+			  type: '',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Delete it!'
+			}).then(
+			   function(result){
+			   	swal.setDefaults({
+			   	  
+				  confirmButtonText: 'Comfirm &rarr;',
+				  showCancelButton: true,
+				  // progressSteps: ['1', '2', '3']
+				})
 
-			swal.queue(steps).then(
-				function(result) {
-				  swal.resetDefaults()
-
-				  if (result) {
-				    swal({
-				      title: 'สำเร็จ!',
-				      type: 'success',
-				      html:
-				        'ลบรายการจองวันที่ ' + $filter('date')(event.start._i, "yyyy-MM-dd")+' เวลา' + $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm")+
-				        '<br> โดยผู้ใช้รหัส '+result +
-				        '<br>เรียบร้อยแล้ว',
-				      confirmButtonText: 'ตกลง'
-				    })
+				var steps = [
+				  { 
+				  	input: 'text',
+				    title: 'รายละเอียดการใช้ห้อง',
+					  //text: "You won't be able to revert this!",
+					html: '<table id="table" border=0 width=100% align="center"> ' + 
+				            '<tbody><tr bgcolor="#eff5f5">' +
+				            	'<td align="left"> ผู้จอง </td>' +
+				            	'<td> '+ event.title + '</td>' +
+				            '</tr></tbody>'+
+				            '<tbody><tr>' +
+				            	'<td align="left"> วันที่จอง </td>' +
+				            	'<td> '+ $filter('date')(event.start._i, "yyyy-MM-dd") + '</td>' +
+				            '</tr></tbody>'+
+				            '<tbody><tr bgcolor="#eff5f5">' +
+				            	'<td align="left"> เวลาที่จอง </td>' +
+				            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
+				            '</tr></tbody>'+
+				        '</table><br>'+
+				        'กรุณากรอกรหัสนักศึกษาเพื่อยืนยันการลบข้อมูล',
+					  
 				  }
-				},function(dismiss){
+				  
+				]
+
+				swal.queue(steps).then(
+					function(result) {
+					  swal.resetDefaults()
+
+					  if (result) {
+					    swal({
+					      title: 'สำเร็จ!',
+					      type: 'success',
+					      html:
+					        'ลบรายการจองวันที่ ' + $filter('date')(event.start._i, "yyyy-MM-dd")+' เวลา' + $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm")+
+					        '<br> โดยผู้ใช้รหัส '+result +
+					        '<br>เรียบร้อยแล้ว',
+					      confirmButtonText: 'ตกลง'
+					    })
+					  }
+					},function(dismiss){
+				   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
+				    } 
+				)
+			    
+			   },function(dismiss){
 			   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
-			    } 
+			   }
 			)
-		    
-		   },function(dismiss){
-		   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
-		   }
-		)
+		}
 	}
 	
 	console.log(events)

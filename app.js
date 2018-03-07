@@ -18,6 +18,21 @@ var db = mongojs('test-RBS',['test-RBS']);
 var moment = require('moment-timezone');
 // var schedule = require('node-schedule');
 
+// credit--> https://stackoverflow.com/questions/11480769/how-can-i-check-if-a-json-is-empty-in-nodejs
+// This should work in node.js and other ES5 compliant implementations.
+function isEmptyObject(obj) {
+  return !Object.keys(obj).length;
+}
+
+// This should work both there and elsewhere.
+function isEmptyObject(obj) {
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      return false;
+    }
+  }
+  return true;
+}
 
 module.exports = function(app) {
 
@@ -45,26 +60,72 @@ module.exports = function(app) {
 		var viewTime = text.split(',');
 		var viewStart = new Date(viewTime[0]);
 		var viewEnd = new Date(viewTime[1]);	
-		
+		var events = [];
 		db.events.find(
-			{start : {$gte: viewStart,$lte: viewEnd}}
+			{$and:
+				[
+					{start : {$gte: viewStart,$lte: viewEnd}},					
+					{ $or:
+						[
+							{status: {$eq: 0}},
+							{status: {$eq: 2}}
+						]
+					}
+					
+				]
+			}
 		).toArray(function (err, docs){
 			//console.log(docs);
-
+			events.splice(0,events.length);	
+			console.log('init events: ',events);
 			if(err){
 				res.json([]);
+			}else if (isEmptyObject(docs)) {
+				
+				console.log(docs.length);
+				res.json([]);
+				
 			}else{
-				docs.forEach(function(doc){
-					
-					start = doc.start;
-					end = doc.end;
-				    doc.start = moment.tz(start,"Asia/Bangkok").format();
-				    doc.end = moment.tz(end,"Asia/Bangkok").format();
-				    
+				
+				var i = 0;	
+				
+				docs.forEach(function(doc){			
+				
+					db.users.findOne({_id:doc.user_id},function(err,user){	
+						i++;				
+						event = doc;
+						if (event.end){
+							start = moment.tz(event.start,"Asia/Bangkok"); 		
+							end = moment.tz(event.end,"Asia/Bangkok");
+
+							event.start = start.format();
+							event.end = end.format(); 	
+						}else{
+							start = moment.tz(event.start,"Asia/Bangkok");
+							event.start = start.format("YYYY-MM-DD");
+						}					
+
+						// insert user name to event
+						if (user){
+							//console.log(user)
+							event.title = user.name;
+							event.department = user.department
+							events.push(event);
+							
+						}else if (user == null || user == ""){
+							events.push(event);
+						}else{
+							events.push(event);
+						}
+
+						if(i == docs.length){								
+							res.json(events);
+						}
+					});		
+
 				});
 
-
-				res.json(docs);
+				
 			}
 		});
 	});

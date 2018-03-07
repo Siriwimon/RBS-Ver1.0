@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html ng-app="RBSCalapp" lang="en" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style><style type="text/css">.uib-time input{width:50px;}</style><style type="text/css">[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-html-popup].tooltip.right-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.top-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-left > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.bottom-right > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.left-bottom > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-top > .tooltip-arrow,[uib-tooltip-template-popup].tooltip.right-bottom > .tooltip-arrow,[uib-popover-popup].popover.top-left > .arrow,[uib-popover-popup].popover.top-right > .arrow,[uib-popover-popup].popover.bottom-left > .arrow,[uib-popover-popup].popover.bottom-right > .arrow,[uib-popover-popup].popover.left-top > .arrow,[uib-popover-popup].popover.left-bottom > .arrow,[uib-popover-popup].popover.right-top > .arrow,[uib-popover-popup].popover.right-bottom > .arrow,[uib-popover-html-popup].popover.top-left > .arrow,[uib-popover-html-popup].popover.top-right > .arrow,[uib-popover-html-popup].popover.bottom-left > .arrow,[uib-popover-html-popup].popover.bottom-right > .arrow,[uib-popover-html-popup].popover.left-top > .arrow,[uib-popover-html-popup].popover.left-bottom > .arrow,[uib-popover-html-popup].popover.right-top > .arrow,[uib-popover-html-popup].popover.right-bottom > .arrow,[uib-popover-template-popup].popover.top-left > .arrow,[uib-popover-template-popup].popover.top-right > .arrow,[uib-popover-template-popup].popover.bottom-left > .arrow,[uib-popover-template-popup].popover.bottom-right > .arrow,[uib-popover-template-popup].popover.left-top > .arrow,[uib-popover-template-popup].popover.left-bottom > .arrow,[uib-popover-template-popup].popover.right-top > .arrow,[uib-popover-template-popup].popover.right-bottom > .arrow{top:auto;bottom:auto;left:auto;right:auto;margin:0;}[uib-popover-popup].popover,[uib-popover-html-popup].popover,[uib-popover-template-popup].popover{display:block !important;}</style><style type="text/css">.uib-datepicker-popup.dropdown-menu{display:block;float:none;margin:0;}.uib-button-bar{padding:10px 9px 2px;}</style><style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style><style type="text/css">.uib-datepicker .uib-title{width:100%;}.uib-day button,.uib-month button,.uib-year button{min-width:100%;}.uib-left,.uib-right{width:100%}</style><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    
+    <!-- Meta, title, CSS, favicons, etc. -->
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ระบบจองห้อง </title>
+
+    <!-- Bootstrap -->
+    <link href="./ระบบจองห้อง_files/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="./ระบบจองห้อง_files/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="./ระบบจองห้อง_files/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="./ระบบจองห้อง_files/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="./ระบบจองห้อง_files/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="./ระบบจองห้อง_files/jqvmap.min.css" rel="stylesheet">    
+    <!-- bootstrap-datetimepicker -->
+    <link href="./ระบบจองห้อง_files/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="./ระบบจองห้อง_files/custom.min.css" rel="stylesheet">
+    <link href="./ระบบจองห้อง_files/fullcalendar.min.css" rel="stylesheet">
+	<link href="./ระบบจองห้อง_files/fullcalendar.print.min.css" rel="stylesheet" media="print">
+	<link href="./ระบบจองห้อง_files/scheduler.min.css" rel="stylesheet">
+
+
+	
+
+  </head>
+
+  <body class="nav-md" style="">
+    <div ng-controller="indexCtrl" class="container body ng-scope">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="http://localhost:3000/main" class="site_title"><i class="fa fa-book ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="project_title"></i> <span class="ng-binding">ระบบจองห้อง</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <!-- <div class="profile clearfix"> -->
+              
+            <!-- </div> -->
+            <!-- /menu profile quick info -->
+
+            <br>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- <h3>General</h3> -->
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> หน้าหลัก <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="http://localhost:3000/main">ตารางการใช้ห้อง</a></li>
+                      <li><a href="http://localhost:3000/findemptyroom">ค้นหาห้องว่าง</a></li>
+                      <li><a href="http://localhost:3000/studentauth">จองห้อง</a></li>
+                      <!-- <li><a href="index3.html">Dashboard3</a></li> -->
+                    </ul>
+                  </li>                  
+                  <li><a><i class="fa fa-info-circle"></i> ข้อมูลห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="http://localhost:3000/infotutor">ห้องติว</a></li>
+                      <li><a href="http://localhost:3000/inforedhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="http://localhost:3000/infolinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> ข้อมูลนักศึกษา <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="http://localhost:3000/checkid">ตรวจสอบข้อมูล</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> ข้อมูลสถิติ <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="http://localhost:3000/dashboard">สถิติการใช้ห้อง</a></li>
+                      
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-legal"></i>ระเบียบการใช้ห้อง <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="http://localhost:3000/rulestutor">ห้องติว</a></li>
+                      <li><a href="http://localhost:3000/rulesredhat">ห้องบริการบุคลากร/น.ศ. โท-เอก</a></li>
+                      <li><a href="http://localhost:3000/ruleslinux">ห้องบริการเพื่อการเรียนรู้</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="menu_section">
+                
+              </div> -->
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+            	
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 699px;">                 
+          <br>
+          <div class="row">
+          	
+          	<div class="col-md-12 col-sm-12 col-xs-12">
+	          	<div class="dashboard_graph">
+	          		<div class="row x_title">
+	                  <div class="col-md-6">
+	                    <h3>ตารางการจองห้อง <small>ภายในศูนย์คอมพิวเตอร์</small></h3>
+		                
+	                  </div>
+	                  
+	                  <div class="col-md-6">
+	                    <ul class="nav navbar-right ">
+	                      	<a class="btn btn-success submit" href="http://localhost:3000/findemptyroom"><i class="fa fa-calendar-o"></i>&nbsp;&nbsp;ค้นหาห้องว่าง</a>
+                    		<a class="btn btn-primary submit" href="http://localhost:3000/studentauth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+	                    </ul>
+	                  </div>
+	                </div>
+	                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+	                  	<div id="calendar" class="demo-placeholder"></div>
+	                </div> -->
+	                <div class="x_content">
+                      <div class="dashboard-widget-content">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="calendar ng-pristine ng-untouched ng-valid ng-isolate-scope fc fc-unthemed fc-ltr ng-not-empty" id="calendar1" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="eventSources" calendar="calendar"><div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right">today</button><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-timelineDay-button fc-button fc-state-default fc-corner-left fc-state-active">day</button><button type="button" class="fc-timelineThreeDays-button fc-button fc-state-default">3 days</button><button type="button" class="fc-agendaWeek-button fc-button fc-state-default">week</button><button type="button" class="fc-month-button fc-button fc-state-default">month</button><button type="button" class="fc-listWeek-button fc-button fc-state-default fc-corner-right">list</button></div></div><div class="fc-center"><h2>February 22, 2018</h2></div><div class="fc-clear"></div></div><div class="fc-view-container" style=""><div class="fc-view fc-timelineDay-view fc-timeline fc-unselectable fc-nested"><table class=""> <thead class="fc-head"> <tr> <td class="fc-resource-area fc-widget-header" style="width: 29%;"><div class="fc-scroller-clip"><div class="fc-scroller" style="overflow-x: scroll; overflow-y: hidden; margin: 0px 0px -15px;"><div class="fc-scroller-canvas" style="min-width: 70px;"> <div class="fc-content"><table class="" style="height: 34px;"><colgroup><col class="fc-main-col"></colgroup><tbody><tr><th class="fc-widget-header"><div><div class="fc-cell-content"><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">Rooms</span></div></div></th></tr></tbody></table></div> <div class="fc-bg"></div> </div></div></div></td> <td class="fc-divider fc-col-resizer fc-widget-header"></td> <td class="fc-time-area fc-widget-header"><div class="fc-scroller-clip"><div class="fc-scroller" style="overflow-x: scroll; overflow-y: hidden; margin: 0px 0px -15px;"><div class="fc-scroller-canvas" style="width: 0px; min-width: 727px;"> <div class="fc-content"><table class="" style="height: 34px;"><colgroup><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col></colgroup><tbody><tr class="fc-chrono"><th class="fc-widget-header" data-date="2018-02-22T08:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">8am</span></div></th><th class="fc-widget-header" data-date="2018-02-22T09:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">9am</span></div></th><th class="fc-widget-header" data-date="2018-02-22T10:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">10am</span></div></th><th class="fc-widget-header" data-date="2018-02-22T11:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">11am</span></div></th><th class="fc-widget-header" data-date="2018-02-22T12:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">12pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T13:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">1pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T14:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">2pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T15:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">3pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T16:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">4pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T17:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">5pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T18:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">6pm</span></div></th><th class="fc-widget-header" data-date="2018-02-22T19:00:00" colspan="2"><div class="fc-cell-content"><span class="fc-cell-text">7pm</span></div></th></tr></tbody></table></div> <div class="fc-bg"></div> </div></div></div></td> </tr> </thead> <tbody class="fc-body"> <tr> <td class="fc-resource-area fc-widget-content" style="width: 29%;"><div class="fc-scroller-clip"><div class="fc-scroller" style="overflow-x: auto; overflow-y: scroll; height: auto; margin: 0px -15px 0px 0px;"><div class="fc-scroller-canvas" style="min-width: 70px;"> <div class="fc-content"><div class="fc-rows"> <table class=""><colgroup><col class="fc-main-col"></colgroup><tbody><tr data-resource-id="t"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-expander-space fc-expander"><span class="fc-icon fc-icon-down-triangle"></span></span><span class="fc-cell-text">ห้องติว</span></div></div></td></tr><tr data-resource-id="t1"><td class="fc-widget-content"><div style="height: 78px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">ubuntu</span></div></div></td></tr><tr data-resource-id="t2"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">cent-OS</span></div></div></td></tr><tr data-resource-id="t3"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">fedora</span></div></div></td></tr><tr data-resource-id="t4"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">solaris</span></div></div></td></tr><tr data-resource-id="t5"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">debian</span></div></div></td></tr><tr data-resource-id="r"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-expander-space fc-expander"><span class="fc-icon fc-icon-down-triangle"></span></span><span class="fc-cell-text">ห้องบริการบุคลากร/ น.ศ.โท-เอก</span></div></div></td></tr><tr data-resource-id="r1"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">redhat</span></div></div></td></tr><tr data-resource-id="u"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-expander-space fc-expander"><span class="fc-icon fc-icon-down-triangle"></span></span><span class="fc-cell-text">ห้องบริการเพื่อการเรียนรู้</span></div></div></td></tr><tr data-resource-id="u1"><td class="fc-widget-content"><div style="height: 44px;"><div class="fc-cell-content"><span class="fc-icon"></span><span class="fc-expander-space"><span class="fc-icon"></span></span><span class="fc-cell-text">linux</span></div></div></td></tr></tbody> </table> </div></div> <div class="fc-bg"></div> </div></div></div></td> <td class="fc-divider fc-col-resizer fc-widget-header"></td> <td class="fc-time-area fc-widget-content"><div class="fc-scroller-clip"><div class="fc-scroller" style="overflow: auto; height: auto; margin: 0px;"><div class="fc-scroller-canvas" style="width: 0px; min-width: 727px;"> <div class="fc-content"><div class="fc-rows"> <table class=""> <tbody><tr data-resource-id="t"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container"></div> </div> </td></tr><tr data-resource-id="t1"><td class="fc-widget-content"> <div style="height: 78px;"> <div class="fc-event-container" style="height: 70px;"><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(127, 97, 186); border-color: rgb(127, 97, 186); left: 61px; right: -241px; top: 35px;" uib-tooltip="ผู้จอง: 0000000000000
+เวลา: 09:00-12:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000000</span></div><div class="fc-bg"></div></a><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(127, 97, 186); border-color: rgb(127, 97, 186); left: 0px; right: -421px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000001
+เวลา: 08:00-15:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000001</span></div><div class="fc-bg"></div></a></div> </div> </td></tr><tr data-resource-id="t2"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container" style="height: 35px;"><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(51, 122, 183); border-color: rgb(51, 122, 183); left: 121px; right: -241px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000002
+เวลา: 10:00-12:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000002</span></div><div class="fc-bg"></div></a><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(51, 122, 183); border-color: rgb(51, 122, 183); left: 301px; right: -421px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000003
+เวลา: 13:00-15:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000003</span></div><div class="fc-bg"></div></a></div> </div> </td></tr><tr data-resource-id="t3"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container" style="height: 35px;"><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(91, 192, 222); border-color: rgb(91, 192, 222); left: 61px; right: -241px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000004
+เวลา: 09:00-12:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000004</span></div><div class="fc-bg"></div></a><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(91, 192, 222); border-color: rgb(91, 192, 222); left: 361px; right: -421px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000005
+เวลา: 14:00-15:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000005</span></div><div class="fc-bg"></div></a></div> <div class="fc-highlight-container"><div class="fc-highlight" style="left: 61px; right: -91px;"></div></div></div> </td></tr><tr data-resource-id="t4"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container" style="height: 35px;"><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(240, 173, 78); border-color: rgb(240, 173, 78); left: 0px; right: -301px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000006
+เวลา: 08:00-13:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000006</span></div><div class="fc-bg"></div></a><div uib-tooltip-popup="" uib-title="" content="ผู้จอง: 0000000000006
+เวลา: 08:00-13:00" origin-scope="origScope" class="tooltip ng-scope ng-isolate-scope top fade in" tooltip-animation-class="fade" uib-tooltip-classes="" ng-class="{ in: isOpen }" style="top: -84px; left: 42px;"><div class="tooltip-arrow"></div>
+<div class="tooltip-inner ng-binding" ng-bind="content">ผู้จอง: 0000000000006
+เวลา: 08:00-13:00</div>
+</div><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(240, 173, 78); border-color: rgb(240, 173, 78); left: 361px; right: -421px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000007
+เวลา: 14:00-15:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000007</span></div><div class="fc-bg"></div></a></div> </div> </td></tr><tr data-resource-id="t5"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container" style="height: 35px;"><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(38, 185, 154); border-color: rgb(38, 185, 154); left: 121px; right: -181px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000008
+เวลา: 10:00-11:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000008</span></div><div class="fc-bg"></div></a><a class="fc-timeline-event fc-h-event fc-event fc-start fc-end ng-scope" style="background-color: rgb(38, 185, 154); border-color: rgb(38, 185, 154); left: 241px; right: -361px; top: 0px;" uib-tooltip="ผู้จอง: 0000000000009
+เวลา: 12:00-14:00" uibtooltip-append-to-body="true"><div class="fc-content"><span class="fc-title" style="top: 0px; left: 0px;">0000000000009</span></div><div class="fc-bg"></div></a></div> </div> </td></tr><tr data-resource-id="r"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container"></div> </div> </td></tr><tr data-resource-id="r1"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container"></div> </div> </td></tr><tr data-resource-id="u"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container"></div> </div> </td></tr><tr data-resource-id="u1"><td class="fc-widget-content"> <div style="height: 44px;"> <div class="fc-event-container"></div> </div> </td></tr></tbody> </table> </div></div> <div class="fc-bg"><div class="fc-slats"><table class=""><colgroup><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col style="width: 30px;"><col></colgroup><tbody><tr><td class="fc-widget-content fc-major" data-date="2018-02-22T08:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T08:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T09:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T09:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T10:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T10:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T11:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T11:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T12:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T12:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T13:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T13:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T14:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T14:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T15:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T15:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T16:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T16:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T17:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T17:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T18:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T18:30:00"><div></div></td><td class="fc-widget-content fc-major" data-date="2018-02-22T19:00:00"><div></div></td><td class="fc-widget-content fc-minor" data-date="2018-02-22T19:30:00"><div></div></td></tr></tbody></table></div></div> </div></div></div></td> </tr> </tbody> </table></div></div></div>
+                        </div>
+                      </div>
+                    </div>
+	            	<div class="clearfix"></div>
+		        </div>
+
+          	</div>
+          </div>
+
+
+          <!-- <br />   -->
+
+                    
+        <!-- /page content -->
+
+        <!-- footer content -->
+        </div>
+        <footer>
+          <div class="pull-right">
+            พัฒนาโดย ศูนย์คอมพิวเตอร์ คณะวิศวกรรมศาสตร์ มจพ. <a href="https://www.ecc.eng.kmutnb.ac.th/">(ECC)</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="./ระบบจองห้อง_files/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./ระบบจองห้อง_files/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="./ระบบจองห้อง_files/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="./ระบบจองห้อง_files/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="./ระบบจองห้อง_files/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="./ระบบจองห้อง_files/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="./ระบบจองห้อง_files/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="./ระบบจองห้อง_files/moment.min.js"></script>
+    <script src="./ระบบจองห้อง_files/daterangepicker.js"></script>
+    <!-- bootstrap-datetimepicker -->    
+    <script src="./ระบบจองห้อง_files/bootstrap-datetimepicker.min.js"></script>
+    <!-- iCheck -->
+    <script src="./ระบบจองห้อง_files/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="./ระบบจองห้อง_files/skycons.js"></script>
+    <!-- Flot -->
+    <script src="./ระบบจองห้อง_files/jquery.flot.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.flot.pie.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.flot.time.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.flot.stack.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="./ระบบจองห้อง_files/jquery.flot.orderBars.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.flot.spline.min.js"></script>
+    <script src="./ระบบจองห้อง_files/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="./ระบบจองห้อง_files/date.js"></script>
+    <!-- JQVMap -->
+    <script src="./ระบบจองห้อง_files/jquery.vmap.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.vmap.world.js"></script>
+    <script src="./ระบบจองห้อง_files/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="./ระบบจองห้อง_files/moment.min(1).js"></script>	
+    <!-- <script src="../vendors/moment/min/moment.min.js"></script> -->
+    <script src="./ระบบจองห้อง_files/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="./ระบบจองห้อง_files/custom.min.js"></script>
+
+    <!-- chrome bug with Slow network is detected. Fallback font will be used while loading:  /bootstrap/dist/fonts/glyphicons-halflings-regular.woff2 
+    edit by Goto chrome://flags/#enable-webfonts-intervention-v2 and set it to disabled
+    from https://stackoverflow.com/questions/42342133/slow-network-is-detected-fallback-font-will-be-used-while-loading-angular-app -->
+
+    <!-- custom script -->
+    <script src="./ระบบจองห้อง_files/angular.min.js"></script>
+    <script src="./ระบบจองห้อง_files/angular-route.min.js"></script>   
+    <script src="./ระบบจองห้อง_files/calendar.min.js"></script> 
+    <script src="./ระบบจองห้อง_files/angular-animate.js"></script>
+    <script src="./ระบบจองห้อง_files/angular-sanitize.js"></script>
+    <script src="./ระบบจองห้อง_files/ui-bootstrap-tpls.js"></script>
+    
+	<!-- <script src='js/jquery-3.2.1/jquery.min.js'></script> -->
+	<script src="./ระบบจองห้อง_files/fullcalendar.min.js"></script>	
+	<script src="./ระบบจองห้อง_files/scheduler.min.js"></script>
+
+  <!-- Sweet Alert2 -->
+  <script src="./ระบบจองห้อง_files/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="./ระบบจองห้อง_files/sweetalert2.min.css">
+
+	<!-- controllers -->
+	<script src="./ระบบจองห้อง_files/calendarApp.js"></script>
+    <script src="./ระบบจองห้อง_files/main.js"></script>
+    
+
+
+	
+  
+
+</body></html>
