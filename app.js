@@ -61,72 +61,94 @@ module.exports = function(app) {
 		var viewStart = new Date(viewTime[0]);
 		var viewEnd = new Date(viewTime[1]);	
 		var events = [];
-		db.events.find(
-			{$and:
-				[
-					{start : {$gte: viewStart,$lte: viewEnd}},					
-					{ $or:
+		
+		db.events.aggregate( 
+			[
+				{ $match: 
+					{$and:
 						[
-							{status: {$eq: 0}},
-							{status: {$eq: 2}}
-						]
-					}
-					
-				]
-			}
-		).toArray(function (err, docs){
-			//console.log(docs);
-			events.splice(0,events.length);	
-			console.log('init events: ',events);
-			if(err){
-				res.json([]);
-			}else if (isEmptyObject(docs)) {
-				
-				console.log(docs.length);
-				res.json([]);
-				
-			}else{
-				
-				var i = 0;	
-				
-				docs.forEach(function(doc){			
-				
-					db.users.findOne({_id:doc.user_id},function(err,user){	
-						i++;				
-						event = doc;
-						if (event.end){
-							start = moment.tz(event.start,"Asia/Bangkok"); 		
-							end = moment.tz(event.end,"Asia/Bangkok");
-
-							event.start = start.format();
-							event.end = end.format(); 	
-						}else{
-							start = moment.tz(event.start,"Asia/Bangkok");
-							event.start = start.format("YYYY-MM-DD");
-						}					
-
-						// insert user name to event
-						if (user){
-							//console.log(user)
-							event.title = user.name;
-							event.department = user.department
-							events.push(event);
+							{start : {$gte: viewStart,$lte: viewEnd}},					
+							{ $or:
+								[
+									{status: {$eq: 0}},
+									{status: {$eq: 2}}
+								]
+							}
 							
-						}else if (user == null || user == ""){
-							events.push(event);
-						}else{
-							events.push(event);
-						}
+						]
+					} 
+				},{
+			        $lookup:
+			        {
+			            from: "users",
+			            localField: "userID",
+			            foreignField: "id",
+			            as: "userInfo"
+			        }
+			    },{
+			    	$unwind: 
+			    	{
+			    		path:'$userInfo',
+			    		preserveNullAndEmptyArrays: true
+			    	}
+			    },{
+			        $lookup:
+			        {
+			            from: "resources",
+			            localField: "resourceId",
+			            foreignField: "children.id",
+			            as: "resourceInfo"
+			        }
+			    },{
+			    	$unwind: {
+			    		path:'$resourceInfo',
+			    		preserveNullAndEmptyArrays: true
+			    	}
+			    }
+			    ,{
+			        $project: {
+			        	title: { $ifNull: [ "$title", "$userInfo.name" ] },
+			            userID: 1,
+			            resourceId: 1,
+			            //room: 1,
+				        start: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S", date:  { "$add": [ "$start", 7 * 60 * 60 * 1000 ] } } },
+			            end: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S", date:  { "$add": [ "$end", 7 * 60 * 60 * 1000 ] }} },
+			            createAt: 1,
+			            updateAt: 1,
+			            status: 1, 
+			            resourceName: {
+			            	$map: {
+			            		input:{
+			            			$filter: {
+					            		input: "$resourceInfo.children",
+					            		as: "child",
+					            		cond:{	            			
+					            			$eq:["$$child.id","$resourceId"]
+					            			
+					            		}
+					            	}
 
-						if(i == docs.length){								
-							res.json(events);
-						}
-					});		
+			            		},
+			            		as: "room",
+			            		in: "$$room.title"
+			            	}
+					            	
+			            }          
+			        }
+		    	},{
+			    	$unwind: {
+			    		path:'$resourceName',
+			    		preserveNullAndEmptyArrays: true
+			    	}
+			    }
+		    	
+			]
+		).toArray(function (err, docs){
 
-				});
-
-				
-			}
+				console.log(docs.length);
+				console.log(docs);
+				// db.close();
+				res.json(docs)
 		});
 	});
 

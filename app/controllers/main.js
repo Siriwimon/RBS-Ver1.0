@@ -7,7 +7,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	  	calendar:{
 	  		schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
 	  		// now: '2018-02-20',
-	  		//allDaySlot:true,
+	  		allDaySlot:true,
 		    selectable: true,
 		    selectHelper: true,
 		    editable: false,
@@ -142,6 +142,10 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			            	'<td align="left"> เวลาที่จอง </td>' +
 			            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
 			            '</tr></tbody>'+
+			            '<tbody><tr>' +
+				            '<td align="left"> ห้อง </td>' +
+				            '<td> '+ event.resourceName + '</td>' +
+				        '</tr></tbody>'+
 			        '</table>',		  
 			  type: '',
 			  showCancelButton: true,
@@ -174,6 +178,10 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 				            '<tbody><tr bgcolor="#eff5f5">' +
 				            	'<td align="left"> เวลาที่จอง </td>' +
 				            	'<td> '+ $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm") + '</td>' +
+				            '</tr></tbody>'+
+				            '<tbody><tr>' +
+				            	'<td align="left"> ห้อง </td>' +
+				            	'<td> '+ event.resourceId + '</td>' +
 				            '</tr></tbody>'+
 				        '</table><br>'+
 				        'กรุณากรอกรหัสนักศึกษาเพื่อยืนยันการลบข้อมูล',
