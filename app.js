@@ -111,7 +111,13 @@ module.exports = function(app) {
 			            userID: 1,
 			            resourceId: 1,
 			            //room: 1,
-				        start: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S", date:  { "$add": [ "$start", 7 * 60 * 60 * 1000 ] } } },
+				        start:{ 
+			            	$cond:{	            		
+			            		if: {$eq:[{ $hour: "$start" }, 0]},
+			            		then: { $dateToString: { format: "%Y-%m-%d", date:  { "$add": [ "$start", 7 * 60 * 60 * 1000 ] } } },
+			            		else: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S", date:  { "$add": [ "$start", 7 * 60 * 60 * 1000 ] } } }	
+			            	}
+			        	},
 			            end: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S", date:  { "$add": [ "$end", 7 * 60 * 60 * 1000 ] }} },
 			            createAt: 1,
 			            updateAt: 1,

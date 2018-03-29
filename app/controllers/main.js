@@ -17,6 +17,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		    maxTime: "20:00:00",
 		    aspectRatio: 1.8,
 			scrollTime: '00:00', // undo default 6am scrollTime
+			eventColor: '#a3b4c2',
 			header: {
 				left: 'today prev,next',
 				center: 'title',
@@ -181,7 +182,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 				            '</tr></tbody>'+
 				            '<tbody><tr>' +
 				            	'<td align="left"> ห้อง </td>' +
-				            	'<td> '+ event.resourceId + '</td>' +
+				            	'<td> '+ event.resourceName + '</td>' +
 				            '</tr></tbody>'+
 				        '</table><br>'+
 				        'กรุณากรอกรหัสนักศึกษาเพื่อยืนยันการลบข้อมูล',
@@ -194,7 +195,8 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 					function(result) {
 					  swal.resetDefaults()
 
-					  if (result) {
+					  if (result == event.userID ) {
+
 					    swal({
 					      title: 'สำเร็จ!',
 					      type: 'success',
@@ -204,7 +206,15 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 					        '<br>เรียบร้อยแล้ว',
 					      confirmButtonText: 'ตกลง'
 					    })
+					  }else{
+					  	swal({
+						  type: 'error',
+						  title: 'ขออภัย',
+						  text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',
+						  //footer: '<a href>Why do I have this issue?</a>',
+						})
 					  }
+
 					},function(dismiss){
 				   		// handle dismiss ('cancel', 'overlay', 'esc' or 'timer')
 				    } 
