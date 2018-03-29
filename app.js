@@ -158,6 +158,22 @@ module.exports = function(app) {
 		});
 	});
 
+	app.put('/main/deleteEvent/:id', function (req, res) {
+		var id = req.params.id;
+		var body = req.body;
+		var userID = body[0];
+		var eventInfo = body[1];
+
+		if (userID == eventInfo.userID){
+			res.json("OK");
+		}else{
+			res.json("No");
+		}
+
+
+		
+	});
+
 	// ============ end of main page  ==============
 	app.get('/checkid', function (req,res){
 		// res.render('home.html');

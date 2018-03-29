@@ -2,6 +2,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	// body...
 	$scope.project_title = "ระบบจองห้อง";
 	var events = [];	
+	var viewStart,viewEnd;	// for refresh after change
 
 	$scope.uiConfig = {
 	  	calendar:{
@@ -195,24 +196,8 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 					function(result) {
 					  swal.resetDefaults()
 
-					  if (result == event.userID ) {
-
-					    swal({
-					      title: 'สำเร็จ!',
-					      type: 'success',
-					      html:
-					        'ลบรายการจองวันที่ ' + $filter('date')(event.start._i, "yyyy-MM-dd")+' เวลา' + $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm")+
-					        '<br> โดยผู้ใช้รหัส '+result +
-					        '<br>เรียบร้อยแล้ว',
-					      confirmButtonText: 'ตกลง'
-					    })
-					  }else{
-					  	swal({
-						  type: 'error',
-						  title: 'ขออภัย',
-						  text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',
-						  //footer: '<a href>Why do I have this issue?</a>',
-						})
+					  if (result) {
+					  	$scope.deleteEvent(result[0],event);					    
 					  }
 
 					},function(dismiss){
@@ -228,6 +213,51 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	}
 	
 	console.log(events)
+
+	$scope.deleteEvent = function(id,event){
+
+		var thisEvent = {};
+			thisEvent._id = event._id;
+			thisEvent.start = event.start._i;
+			thisEvent.userID = event.userID;
+
+		var eventData = [id,thisEvent];
+
+		$http.put('/main/deleteEvent/' + event._id,eventData).then(successCallback,errorCallback);
+			
+		function successCallback(response){
+			
+			data = response.data;
+			console.log(data);
+			
+			if (id == event.userID ) {
+			    swal({
+			      title: 'สำเร็จ!',
+			      type: 'success',
+			      html:
+			        'ลบรายการจองวันที่ ' + $filter('date')(event.start._i, "yyyy-MM-dd")+' เวลา' + $filter('date')(event.start._i, "HH:mm") + '-' + $filter('date')(event.end._i, "HH:mm")+
+			        '<br> โดยผู้ใช้รหัส '+id +
+			        '<br>เรียบร้อยแล้ว',
+			      confirmButtonText: 'ตกลง'
+			    })
+			}else{
+			  	swal({
+				  type: 'error',
+				  title: 'ขออภัย',
+				  text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',				  
+				})
+			}
+		};		
+
+		function errorCallback(error){
+			console.log(error);
+			swal({
+				type: 'error',
+				title: 'ขออภัย',
+				text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',			   
+			})
+		};		
+	}
 	
 	//$scope.renderEvents();
 	$scope.eventSources = [events];
