@@ -121,6 +121,7 @@ module.exports = function(app) {
 			            end: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S", date:  { "$add": [ "$end", 7 * 60 * 60 * 1000 ] }} },
 			            createAt: 1,
 			            updateAt: 1,
+			            modifiedBy: { $ifNull: [ "$modifiedBy", "" ] },
 			            status: 1, 
 			            resourceName: {
 			            	$map: {
@@ -163,15 +164,47 @@ module.exports = function(app) {
 		var body = req.body;
 		var userID = body[0];
 		var eventInfo = body[1];
+		ms = 15 * 60 * 1000; // 15 min to milliseconds
 
-		if (userID == eventInfo.userID){
-			res.json("OK");
-		}else{
-			res.json("No");
-		}
-
-
+		start = new Date(moment.tz(eventInfo.start,"Asia/Bangkok"));		
+		end = new Date(moment.tz(eventInfo.end,"Asia/Bangkok"));	
+		now = new Date(moment.tz(new Date(),"Asia/Bangkok"))		
 		
+		ms = 15 * 60 * 1000;
+
+		db.users.findOne({
+			id:userID
+		},function(err,doc){
+			if (err){
+				// throw new Error('No record found');
+				res.json("NoUser");
+			}else if(doc == null || doc == ""){
+				res.json("NoUser");
+			}else{
+
+				if ((userID == eventInfo.userID) && (now.getTime() < start.getTime())){
+					var status = 1;
+					
+					db.events.findAndModify({query: {_id: mongojs.ObjectId(id)}, 
+						update: {$set: {status: status , updateAt: new Date(), modifiedBy: userID}},
+						new: true}, function (err, doc) {
+							console.log("Delete event by: ", userID );
+							res.json("OK");	
+					});
+				}else if (((userID != "") && (userID != eventInfo.userID)) && ( (now.getTime() - start.getTime() > ms) && (now.getTime() < end.getTime()) ) ) { // ((userID != eventInfo.userID) && ((now.getFullYear() == start.getFullYear()) && (now.getMonth() == start.getMonth()) && (now.getDate() == start.getDate()) && ((now.getHours() >= start.getHours()) && (now.getHours() < end.getHours()) ) && (now.getMinutes() > start.getMinutes()) ) )
+					var status = 1;
+					
+					db.events.findAndModify({query: {_id: mongojs.ObjectId(id)}, 
+						update: {$set: {status: status , updateAt: new Date(), modifiedBy: userID}},
+						new: true}, function (err, doc) {
+							console.log("Delete event by: ", userID );
+							res.json("OK");	
+					});
+				}else{
+					res.json("No");
+				}
+			}
+		})		
 	});
 
 	// ============ end of main page  ==============

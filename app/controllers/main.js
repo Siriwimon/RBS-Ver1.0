@@ -126,7 +126,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 	};
 
 	$scope.eventClick = function(event, jsEvent, view){
-		console.log(event)
+		// console.log(event)
 		if (event.end){ // && event.status == 0
 			swal({
 			  title: 'รายละเอียดการใช้ห้อง',
@@ -197,7 +197,8 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 					  swal.resetDefaults()
 
 					  if (result) {
-					  	$scope.deleteEvent(result[0],event);					    
+					  	$scope.deleteEvent(result[0],event);				  	
+
 					  }
 
 					},function(dismiss){
@@ -219,6 +220,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 		var thisEvent = {};
 			thisEvent._id = event._id;
 			thisEvent.start = event.start._i;
+			thisEvent.end = event.end._i;
 			thisEvent.userID = event.userID;
 
 		var eventData = [id,thisEvent];
@@ -230,7 +232,7 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			data = response.data;
 			console.log(data);
 			
-			if (id == event.userID ) {
+			if (data == "OK" ) {
 			    swal({
 			      title: 'สำเร็จ!',
 			      type: 'success',
@@ -240,6 +242,12 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 			        '<br>เรียบร้อยแล้ว',
 			      confirmButtonText: 'ตกลง'
 			    })
+			}else if( data == "NoUser" ){
+				swal({
+				  type: 'error',
+				  title: 'ไม่อนุญาตให้ลบ',
+				  text: 'ไม่พบข้อมูลผู้ใช้งาน กรุณาติดต่อผู้ดูแลระบบ',				  
+				})
 			}else{
 			  	swal({
 				  type: 'error',
@@ -247,14 +255,16 @@ CalendarApp.controller("indexCtrl",['$scope','$http','$filter','$timeout','$log'
 				  text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',				  
 				})
 			}
+
+			
 		};		
 
 		function errorCallback(error){
 			console.log(error);
 			swal({
-				type: 'error',
-				title: 'ขออภัย',
-				text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',			   
+			  type: 'error',
+			  title: 'พบข้อผิดพลาด',
+			  text: 'ไม่สามารถลบการจองห้องได้ กรุณาติดต่อผู้ดูแลระบบ',				  
 			})
 		};		
 	}
