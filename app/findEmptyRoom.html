@@ -14,14 +14,7 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    <!-- bootstrap-datetimepicker -->
-    <link href="../vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-   
-    <!-- Bootstrap Colorpicker -->
-    <link href="../vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">   
 
     <link href="../vendors/cropper/dist/cropper.min.css" rel="stylesheet">
 
@@ -141,20 +134,26 @@
 					        	<div class="form-group">
                         			<label class="control-label col-md-3 col-sm-3 col-xs-3">วันที่</label>
 					                <div class="col-md-7 col-sm-7 col-xs-7">			                    
-					                        <div class='input-group date' id='myDatepicker1'>
-					                            <input type='text' class="form-control" />
-					                            <span class="input-group-addon">
+					                        <!-- <div class='input-group date' id='myDatepicker1'>
+					                            <input type='text' class="form-control" ng-model="date" ng-click="changeState()"/>
+					                            <span class="input-group-addon" >
 					                               <span class="glyphicon glyphicon-calendar"></span>
 					                            </span>
-					                        </div>			                   
+					                        </div>	 -->		   
+
+                                  <p class="input-group" id="StartDate" style="margin-bottom: -2px; ">
+                                    <input   type="text" class="form-control" uib-datepicker-popup="dd-MM-yy" ng-model="date" is-open="popup.opened" datepicker-options="dateOptions" min-date="minDate" max="maxDate" ng-required="true" close-text="Close" ng-change="dateChange()"> <!-- ng-change="checkDate" -->
+                                    <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar" ></i></button>
+                                    </span>
+                                  </p>               
 					                </div>
 					            </div>
 					            <div class="form-group" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;">
                         			<label class="control-label col-md-3 col-sm-3 col-xs-3" style="padding-top: 0;padding-bottom: 6px;" >เวลาเริ่มต้น</label>  
-                        			<div class="col-md-9 col-sm-9 col-xs-9">              
-					                   
+                        			<div class="col-md-9 col-sm-9 col-xs-9">                     
 					                    
-						            	<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+						            	<div uib-timepicker ng-model="startTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" min="min" max="max" ng-change="ctrlStartTime();" ></div>
 						            </div>
 						        </div>	
 						        <div class="form-group" style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;padding-top: 0;">
@@ -162,7 +161,7 @@
                         			<div class="col-md-9 col-sm-9 col-xs-9"> 			               
 					                    
 					                    
-						            	<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+						            	<div uib-timepicker uib-timepicker ng-model="endTime" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" min="min" max="max" ng-change="ctrlEndTime()"></div>
 						            </div>
 						        </div>
 					                
@@ -172,7 +171,8 @@
 					            	<div class="col-md-9 col-md-offset-9">				                
 					                <!-- <div class='col-md-2' style="position: absolute;bottom: 0;right: 0;"> --> <!-- style="position: absolute;bottom: 0;right: 0;padding-bottom: 6px;" --> <!-- style="display: inline-block;vertical-align: middle;float: none;" -->
 					                	<div class="form-group" >
-					                    	<a class="btn btn-success submit" href="findemptyroom"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;ค้นหา</a>
+					                    	<a class="btn btn-success submit" href="findemptyroom"  ng-click="find()" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;&nbsp;ค้นหา</a>
+
 					                    </div>
 					            	</div>
 					            </div>
