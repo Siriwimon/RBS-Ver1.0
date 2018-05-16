@@ -28,6 +28,9 @@ app.controller("findRoomCtrl",['$scope','$http','$compile','$filter','$timeout',
 
 	var maxDate = new Date();
 	maxDate.setDate((new Date()).getDate() + 13);
+
+	$scope.emptyRooms = [];
+	$scope.emptyRoom = "";
 	
 		
 	//===============================

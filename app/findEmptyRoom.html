@@ -213,36 +213,13 @@
 				                        </tr>
 				                      </thead>
 				                      <tbody>
-				                        <tr>
-				                          <th scope="row">1</th>
-				                          <td valign="center" ><a class="btn btn-primary" style="background-color: #7F61BA;border: none;">&nbsp;&nbsp;Ubuntu&nbsp;&nbsp;</a></td>
-				                          <td align="" ="center"><a href="#">รายละเอียดห้อง</a> </td>
-				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
-				                        </tr>
-				                        <tr>
-				                          <th scope="row">2</th>
-				                          <td><a class="btn btn-primary" style="background-color: #5bc0de;border: none;">&nbsp;&nbsp;Fedora&nbsp;&nbsp;</a></td>
-				                          <td><a href="#">รายละเอียดห้อง</a></td>
-				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
-				                        </tr>
-				                        <tr>
-				                          <th scope="row">3</th>
-				                          <td><a class="btn btn-primary" style="background-color: #337ab7;border: none;">&nbsp;Cent-OS&nbsp;</a></td>
-				                          <td><a href="#">รายละเอียดห้อง</a></td>
-				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
-				                        </tr>
-				                        <tr>
-				                          <th scope="row">4</th>
-				                          <td><a class="btn btn-primary" style="background-color: #f0ad4e;border: none;">&nbsp;&nbsp;Solaris&nbsp;&nbsp;</a></td>
-				                          <td><a href="#">รายละเอียดห้อง</a></td>
-				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
-				                        </tr>
-				                        <tr>
-				                          <th scope="row">5</th>
-				                          <td><a class="btn btn-primary" style="background-color: #26b99a;border: none;">&nbsp;&nbsp;Debian&nbsp;&nbsp;</a></td>
-				                          <td><a href="#">รายละเอียดห้อง</a></td>
-				                          <td><a class="btn btn-primary submit" href="findemptyroom"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
-				                        </tr>
+                                <tr ng-repeat="emptyRoom in emptyRooms">
+                                  <th scope="row">{{$index + 1}}</th>
+                                  <td valign="center" ><a class="btn btn-primary" style="background-color: {{emptyRoom.eventColor}};border: none;text-transform: capitalize;padding: 12px 28px;" href="infotutor#{{emptyRoom.title}}">&nbsp;{{emptyRoom.title}}&nbsp;</a></td>
+                                  <td align="" ="center"><a href="infotutor#{{emptyRoom.title}}">รายละเอียดห้อง</a> </td>
+                                  <td><a class="btn btn-primary submit" href="studentauth"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;จองห้อง</a></td>
+                                </tr>
+				                        
 				                      </tbody>
 				                    </table>
 					        	</div>

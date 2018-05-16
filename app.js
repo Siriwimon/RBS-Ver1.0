@@ -11,7 +11,6 @@
 
 var mongojs = require('mongojs');			
 var db = mongojs('test-RBS',['test-RBS']);
-var rooms = [];
 
 // var moment = require('moment');
 // var dbCollections = ["queueRequest","serviceRecord"];
@@ -21,6 +20,10 @@ var moment = require('moment-timezone');
 
 // credit--> https://stackoverflow.com/questions/11480769/how-can-i-check-if-a-json-is-empty-in-nodejs
 // This should work in node.js and other ES5 compliant implementations.
+
+var rooms = [];
+var tutorTitle = [];
+
 function isEmptyObject(obj) {
   return !Object.keys(obj).length;
 }
@@ -40,6 +43,64 @@ Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 
 };
+
+function getResources(callback){
+	
+	var tutorRoomTitle = [];
+
+	db.resources.aggregate( 
+		[
+			{
+		    	$unwind: {
+		    		path:'$children',
+		    		preserveNullAndEmptyArrays: true
+		    	}
+		    }
+		    ,{
+		        $project: {	        	
+		          
+		            _id: 0,         
+		            id: '$children.id',
+		            title: '$children.title',
+		            eventColor: '$children.eventColor'
+
+		        }
+	    	}			    	
+		]
+	).toArray(function (err, docs){
+		// rooms.splice(0,rooms.length);
+		tutorRoomTitle.splice(0,tutorRoomTitle.length);
+		// rooms = docs;
+		
+		docs.forEach(function(doc){
+			if(doc.id.includes('t')){
+				tutorRoomTitle.push(doc.title)
+			}					
+		});
+
+		var getRooms = {
+				rooms: docs,
+				tutorTitle: tutorRoomTitle
+			}
+
+		callback(getRooms);		
+	});
+
+}
+
+function compare2Array(firstArr,secondArr){
+	outArr = [];
+	for (var i = 0; i < firstArr.length; i++) {
+		secondArr.forEach(function(room){
+			if (room == firstArr[i].title){
+				outArr.push(firstArr[i]);
+			}
+		});
+	}
+	return outArr;
+}
+
+
 
 module.exports = function(app) {
 
@@ -236,7 +297,7 @@ module.exports = function(app) {
 	app.get('/findemptyroom', function (req,res){
 		
 		res.sendFile('findEmptyRoom.html',{root : __dirname + '/app'});
-	});
+	});			
 
 	app.get('/findemptyroom/refresh/:text', function (req,res){
 
@@ -249,13 +310,11 @@ module.exports = function(app) {
 		var hours = 3;	
 		var ms = 60*60*1000;
 
+		var getRoomName = [];
 		var emptyRoom = [];
-		var getEmptyRoom = [];
-		var getResourceName = [];
-		var getRoomName = [];		
+		var getEmptyRoom = [];				
 
 		var i = 0;
-
 		
 		var startTime = new Date(moment.tz(new Date(arr[0]),"Asia/Bangkok"));				
 		var	endTime = new Date(moment.tz(new Date(arr[1]),"Asia/Bangkok"));
@@ -335,7 +394,7 @@ module.exports = function(app) {
 			    }
 		    ]
 		).toArray(function (err, docs){
-			// console.log(docs.length)
+			
 			getRoomName.splice(0,getRoomName.length);	
 			emptyRoom.splice(0,emptyRoom.length);
 
@@ -345,67 +404,29 @@ module.exports = function(app) {
 			
 
 			if(chkRoomData == 0){
-				rooms.splice(0,rooms.length);
-				db.resources.aggregate( 
-					[
-						{
-					    	$unwind: {
-					    		path:'$children',
-					    		preserveNullAndEmptyArrays: true
-					    	}
-					    }
-					    ,{
-					        $project: {	        	
-					          
-					            _id: 0,         
-					            id: '$children.id',
-					            title: '$children.title',
-					            eventColor: '$children.eventColor'
+				rooms.splice(0,rooms.length);				
+				getResources(function(response){
+					rooms = response.rooms;
+					tutorTitle = response.tutorTitle;
 
-					        }
-				    	}			    	
-					]
-				).toArray(function (err, resource_docs){
-					rooms.splice(0,rooms.length);
-					getResourceName.splice(0,getResourceName.length);
-					rooms = resource_docs;
-					
-					resource_docs.forEach(function(resource){
-						if(resource.id.includes('t')){
-							getResourceName.push(resource.title)
-						}					
-					});
+					getEmptyRoom = tutorTitle.diff(getRoomName);
 
-					getEmptyRoom = getResourceName.diff(getRoomName);
-
-					for (var i = 0; i < rooms.length; i++) {
-						getEmptyRoom.forEach(function(room){
-							if (room == rooms[i].title){
-								emptyRoom.push(rooms[i]);
-							}
-						})
-					}
+					emptyRoom = compare2Array(rooms,getEmptyRoom);
 
 					console.log(emptyRoom);
 					res.json(emptyRoom);
-				})
+							
+				});				
+						
 			}else{
-				console.log('not refresh')
-				console.log('rooms: ',rooms);
-				console.log('getEmptyRoom: ',getEmptyRoom);
-				getEmptyRoom = getResourceName.diff(getRoomName);
+				
+				getEmptyRoom = tutorTitle.diff(getRoomName);
+				
+				emptyRoom = compare2Array(rooms,getEmptyRoom);
 
-					for (var i = 0; i < rooms.length; i++) {
-						getEmptyRoom.forEach(function(room){
-							if (room == rooms[i].title){
-								emptyRoom.push(rooms[i]);
-							}
-						})
-					}
-
-					console.log(emptyRoom);
-					res.json(emptyRoom);
-			}
+				console.log(emptyRoom);
+				res.json(emptyRoom);
+		}
 
 		});
 	});	
